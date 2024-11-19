@@ -8,7 +8,7 @@ void delay(int seconds){
     while (clock() < end_time);
 }
 
-void work(){
+void work(int *uang_asal){
     int pilihan, pendapatan = 0, durasi = 0;
     char *pekerjaan;
     printf("Daftar pekerjaan: \n");
@@ -53,12 +53,16 @@ void work(){
 
         printf("Anda sedang bekerja sebagai %s... harap tunggu.\n", pekerjaan);
         delay(durasi);
+        *uang_asal += pendapatan;
         printf("Pekerjaan selesai, +%d rupiah telah ditambahkan ke akun Anda.\n", pendapatan);
+        printf("Uang anda sekarang adalah : %d rupiah\n", *uang_asal);
 
 }
 
 int main(){
-    work();
+    int uang_asal = 5000;
+    printf("Uang awal Anda : %d rupiah\n", uang_asal);
+    work(&uang_asal);
     return 0;
 }
     
