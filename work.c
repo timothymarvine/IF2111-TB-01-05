@@ -18,9 +18,9 @@ void work(int *uang_asal){
     printf("4. Mewing Specialist (pendapatan=10000, durasi=22s)\n");
     printf("5. Inator Connoisseur (pendapatan=997, durasi=15s)\n");
     printf("Masukkan pekerjaan yang dipilih: ");
-    scanf("%d", &pilihan);
+    scanf("%d", &pilihankerja);
 
-    switch (pilihan) {
+    switch (pilihankerja) {
         case 1:
             pekerjaan = "Evil Lab Assistant";
             pendapatan = 100;
