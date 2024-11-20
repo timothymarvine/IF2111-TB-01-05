@@ -9,7 +9,7 @@ void delay(int seconds){
 }
 
 void work(int *uang_asal){
-    int pilihan, pendapatan = 0, durasi = 0;
+    int pilihankerja, pendapatan = 0, durasi = 0;
     char *pekerjaan;
     printf("Daftar pekerjaan: \n");
     printf("1. Evil Lab Assistant (pendapatan=100, durasi=14s)\n");

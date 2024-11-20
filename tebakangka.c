@@ -31,6 +31,7 @@ void tebakAngka(int *uang_asal){
     printf("Tebak Angka (1-100) dengan kesempatan tersisa %d \n", kesempatan);
 
     RNGnumber = generateRandomNumber(1,100);
+    printf("%d",RNGnumber);
 
     while(kesempatan > 0){
         printf("Tebak Angka = ");
@@ -40,16 +41,24 @@ void tebakAngka(int *uang_asal){
         }else if(tebakAngka > RNGnumber){
             printf("Tebakanmu lebih besar!\n");
         }else if(tebakAngka == RNGnumber){
-            printf("Tebakanmu benar! %d rupiah telah ditambahkan ke akun Anda\n",hadiah_sisa_uang);
-            *uang_asal += hadiah_sisa_uang;
-            printf("Uang anda sekarang adalah = %d.", *uang_asal);
-            return;
-        }
+            
+            if(kesempatan == 10){
+                hadiah_sisa_uang = 550;
+                printf("Tebakanmu benar! %d rupiah telah ditambahkan ke akun Anda\n",hadiah_sisa_uang);
+                printf("Uang anda sekarang adalah = %d.\n", *uang_asal);
+                return;
+            }else{
+                hadiah_sisa_uang = 550 - 50*(10-kesempatan);
+                printf("Tebakanmu benar! %d rupiah telah ditambahkan ke akun Anda\n",hadiah_sisa_uang);
+                printf("Uang anda sekarang adalah = %d.\n", *uang_asal);
+                return;
+            }
+            }
     kesempatan--;
-    hadiah_sisa_uang = 550 - 50*(10-kesempatan);
     printf("Sisa kesempatan adalah %d.\n\n", kesempatan);
     }
-    printf("Kesempatan Anda sudah habis. Angka yang benar adalah %d. Uang Anda tersisa %d", RNGnumber, *uang_asal);
+    hadiah_sisa_uang = 550 - 50*(10-kesempatan);
+    printf("Kesempatan Anda sudah habis. Angka yang benar adalah %d. Uang Anda tersisa %d\n", RNGnumber, hadiah_sisa_uang);
 }
 
 void workChallenge(int *uang_asal){
@@ -73,8 +82,23 @@ void workChallenge(int *uang_asal){
     }
 }
 
+void yesorno(int *uang_asal){
+    char pilihanyesorno;
+    printf("Apakah anda masih mau bermain? (Y/N)\n");
+    scanf(" %c", &pilihanyesorno);
+
+    switch (pilihanyesorno){
+        case 'Y':
+            workChallenge(uang_asal);
+            return;
+        case 'N':
+            break;
+    }
+}
+
 int main(){
     int uang_asal = 5000;
     workChallenge(&uang_asal);
+    yesorno(&uang_asal);
     return 0;
 }
