@@ -31,7 +31,6 @@ void tebakAngka(int *uang_asal){
     printf("Tebak Angka (1-100) dengan kesempatan tersisa %d.\n", kesempatan);
 
     RNGnumber = generateRandomNumber(1,100);
-    printf("%d",RNGnumber);
 
     while(kesempatan > 0 && tebakanBenar == false){
         printf("Tebak Angka = ");
