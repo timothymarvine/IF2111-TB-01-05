@@ -5,7 +5,6 @@ void helpinwelcome(){
     printf("   1. START -> Untuk masuk sesi baru\n");
     printf("   2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi\n");
     printf("   3. QUIT -> Untuk keluar dari program\n");
-    printf("Masukkan angka: ")
     printf("\n");
 }
 
@@ -32,11 +31,26 @@ void helpinmain(){
 }
 
 int main(){
-    helpinwelcome();
+    int pilihanhelp;
+    scanf("%d", &pilihanhelp);
 
-    helpinlogin();
+    switch(pilihanhelp){
+        case 1:
+        helpinwelcome();
+        break;
 
-    helpinmain();
+        case 2:
+        helpinlogin();
+        break;
+
+        case 3:
+        helpinmain();
+        break;
+
+        default:
+        printf("Tidak ada dipilihan! Coba lagi.");
+        break;
+    }
 
     return 0;
 }
