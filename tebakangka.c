@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "boolean.h"
+#include "tebakangka.h"
 
 int generateRandomNumber(int min, int max) {
     time_t t;
@@ -14,10 +15,6 @@ int generateRandomNumber(int min, int max) {
 
     int randomNum = (seed % (max - min + 1)) + min;
     return randomNum;
-}
-
-void W0RDL399(){
-
 }
 
 void tebakAngka(int *uang_asal){
@@ -34,6 +31,7 @@ void tebakAngka(int *uang_asal){
     printf("Tebak Angka (1-100) dengan kesempatan tersisa %d.\n", kesempatan);
 
     RNGnumber = generateRandomNumber(1,100);
+    printf("%d",RNGnumber);
 
     while(kesempatan > 0 && tebakanBenar == false){
         printf("Tebak Angka = ");
@@ -57,7 +55,6 @@ void tebakAngka(int *uang_asal){
                 printf("Uang anda sekarang adalah = %d.\n", *uang_asal);
                 return;
             }
-
         }
     kesempatan--;
     printf("Sisa kesempatan adalah %d.\n\n", kesempatan);
@@ -65,47 +62,4 @@ void tebakAngka(int *uang_asal){
     hadiah_sisa_uang = 550 - 50*(10-kesempatan);
     printf("Kesempatan Anda sudah habis. Angka yang benar adalah %d. Uang Anda tersisa %d\n", RNGnumber, hadiah_sisa_uang);
 
-}
-
-void workChallenge(int *uang_asal){
-    int pilihanchallenge;
-    printf("Daftar challenge yang tersedia: \n");
-    printf("1. Tebak Angka (biaya main=200)\n");
-    printf("2. W0RDL399 (biaya main=500)\n");
-    printf("Masukkan challenge yang hendak dimainkan: ");
-    scanf("%d", &pilihanchallenge);
-    printf("\n");
-
-    switch (pilihanchallenge){
-        case 1:
-            tebakAngka(uang_asal);
-            break;
-        case 2:
-            W0RDL399();
-            break;
-        default:
-            printf("Pilihanmu tidak ada!");
-            break;
-    }
-}
-
-int main(){
-    int uang_asal = 5000;
-    char kesempatan;
-    boolean tebakanBenar;
-
-    workChallenge(&uang_asal);
-
-    char pilihanyesorno = 'Y';
-
-    while (pilihanyesorno != 'N'){
-        printf("Apakah anda masih mau bermain? (Y/N)\n");
-        scanf(" %c", &pilihanyesorno);
-        if (pilihanyesorno == 'Y'){
-            workChallenge(&uang_asal);
-        }else{
-            printf("Terima kasih sudah bermain Tebak Angka!");
-        }
-    }
-    return 0;
 }
