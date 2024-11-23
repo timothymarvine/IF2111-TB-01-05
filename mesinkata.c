@@ -23,7 +23,7 @@ void IgnoreBlanks(){
 void STARTWORD(){
     START();
     if (pita != NULL){
-        // IgnoreBlanks();
+        IgnoreBlanks();
         if (currentChar==MARK){
             EndWord=true;
         } else {
@@ -79,7 +79,7 @@ void STARTENTER(){
 /* Mesin menerima inputan enter, state program berganti */
 
 void ADVWORD(){
-    // IgnoreBlanks();
+    IgnoreBlanks();
     if (currentChar==MARK){
         EndWord=true;
     } else{
