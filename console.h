@@ -5,17 +5,13 @@
 #include "boolean.h"
 
 extern array ListGame;
-extern Queue QueueGame;
-extern Stack HistoryGame;
-extern arraymap ScoreBoardGame;
-extern int fitur, mode;
 
-/* Fitur-fitur pada BNMO */
+/* Fitur-fitur pada PURRMART */
 
-void LISTGAME(array ListGame);
-/* Menampilkan daftar game terkini yang dimiliki oleh player */
+void LISTGAME(array StoreList);
+/* Menampilkan daftar barang terkini yang dimiliki oleh store */
 
-void DELETEGAME(array *ListGame);
-/* Menghapus sebuah game yang dimiliki oleh player */
+void DELETEGAME(array *StoreList);
+/* Menghapus sebuah barang pada store */
 
 #endif 
