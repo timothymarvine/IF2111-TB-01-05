@@ -1,4 +1,6 @@
 #include "storereq.h"
+#include "adtlist.h"
+#include <stdio.h>
 
 boolean IsEmpty(Queue q){
 	return IDX_HEAD(q) == IDX_UNDEF && IDX_TAIL(q) == IDX_UNDEF;
@@ -19,14 +21,30 @@ int Length(Queue q){
     }
 }
 
-void strCopy(Produk a, Produk b){
+void strCopy(Produk dest, Produk src){
 	for(int i = 0; i < 50; i++){
-		if(b[i] == '\0'){
-			a[i] = '\0';
+		if(src[i] == '\0'){
+			dest[i] = '\0';
 			break;
 		}
-		a[i] = b[i];
+		dest[i] = src[i];
 	}
+}
+
+boolean strCmpr(char *dest, char *src){
+	boolean status = false;
+	for(int i = 0; i < 50; i++){
+		if(*dest == '\0'){
+			break;
+		} else if(*dest != *src){
+			return false;
+		} else {
+			status = true;
+			dest++; src++;
+		}
+	}
+
+	return status;
 }
 
 void CreateQueue(Queue *q){
@@ -55,7 +73,7 @@ void dequeue(Queue *q){
 	}
 }
 
-boolean IsMember(Queue q, Produk x){
+boolean IsMemberQ(Queue q, Produk x){
 	int i = IDX_HEAD(q);
 	while(i != IDX_TAIL(q)){
 		if(q.Tab[i] == x){
@@ -73,7 +91,7 @@ Queue Request(Queue q){
 	printf("Nama barang yang diminta: ");
 	scanf("%s", antri);
 
-	if(IsMember(q, antri)){
+	if(IsMemberQ(q, antri)){
 		printf("Barang dengan nama yang sama sudah tersedia di antrian!");
 		Request(q);
 	} else {
@@ -99,7 +117,7 @@ void DisplayQueue(Queue q){
     }
 }
 
-void Supply(Queue q){
+void Supply(Queue q, Daftar list){
 	char *jawab;
 	int harga;
 	int i = 0;
@@ -107,47 +125,33 @@ void Supply(Queue q){
 		printf("Apakah kamu ingin menambahkan barang %s: ", HEAD(q));
 		scanf("%s", jawab);
 
-		char *terima = "Terima", *tunda = "Tunda", *tolak = "Tolak";
+		// char *terima = "Terima", *tunda = "Tunda", *tolak = "Tolak";
 
-		if(strCmpr(jawab, terima)){
+		if(strCmpr(jawab, "Terima")){
 			printf("Harga barang: ");
 			scanf("%d", &harga);
 
-			// Insert list disini
+			
 
 			dequeue(&q);
-		} else if(strCmpr(jawab, tunda)){
+		} else if(strCmpr(jawab, "Tunda")){
 			enqueue(&q, HEAD(q));
 			dequeue(&q);
-		} else if(strCmpr(jawab, tolak)){
+		} else if(strCmpr(jawab, "Tolak")){
 			dequeue(&q);
+		} else if(strCmpr(jawab, "Purry")){
+			// Mainmenu
 		}
 	}
-}
-
-boolean strCmpr(char *a, char *b){
-	boolean status = false;
-	for(int i = 0; i < 50; i++){
-		if(*a == '\0'){
-			break;
-		} else if(*a != *b){
-			return false;
-		} else {
-			status = true;
-			a++; b++;
-		}
-	}
-
-	return status;
 }
 
 int main(void){
-	Queue q;
+	Queue q; Daftar L;
 	CreateQueue(&q);
 
 	q = Request(q);
 
-	Supply(q);
+	Supply(q, L);
 
 	DisplayQueue(q);
 }

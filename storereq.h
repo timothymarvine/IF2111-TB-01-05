@@ -5,7 +5,6 @@
 #define IDX_UNDEF -1
 
 #include "boolean.h"
-#include <stdio.h>
 
 typedef int IdxType;
 
