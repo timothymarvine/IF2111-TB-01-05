@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "workChallenge.h"
 #include "tebakangka.h"
+#include "mesinkata.h"
+#include "mesinkarakter.h"
 
 void W0RDL399(){
     printf("Lagi proses");
@@ -8,11 +10,14 @@ void W0RDL399(){
 
 void workChallenge(int *uang_asal){
     int pilihanchallenge;
+    char apapun;
     printf("Daftar challenge yang tersedia: \n");
     printf("1. Tebak Angka (biaya main=200)\n");
     printf("2. W0RDL399 (biaya main=500)\n");
     printf("Masukkan challenge yang hendak dimainkan: ");
-    scanf("%d", &pilihanchallenge);
+    STARTWORD();
+    WordToString(currentWord, &apapun);
+    pilihanchallenge = stringToInteger(&apapun);
     printf("\n");
 
     switch (pilihanchallenge){

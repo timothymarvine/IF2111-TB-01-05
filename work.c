@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <time.h>
+#include "mesinkata.h"
+#include "mesinkarakter.h"
 
 void delay(int seconds){
     clock_t start_time = clock();
@@ -8,9 +10,11 @@ void delay(int seconds){
     while (clock() < end_time);
 }
 
+
 void work(int *uang_asal){
     int pilihankerja, pendapatan = 0, durasi = 0;
     char *pekerjaan;
+    char tes;
     printf("Daftar pekerjaan: \n");
     printf("1. Evil Lab Assistant (pendapatan=100, durasi=14s)\n");
     printf("2. OWCA Hiring Manager (pendapatan=4200, durasi=21s)\n");
@@ -18,7 +22,9 @@ void work(int *uang_asal){
     printf("4. Mewing Specialist (pendapatan=10000, durasi=22s)\n");
     printf("5. Inator Connoisseur (pendapatan=997, durasi=15s)\n");
     printf("Masukkan pekerjaan yang dipilih: ");
-    scanf("%d", &pilihankerja);
+    STARTWORD();
+    WordToString(currentWord, &tes);
+    pilihankerja = stringToInteger(&tes);
 
     switch (pilihankerja) {
         case 1:
@@ -58,11 +64,3 @@ void work(int *uang_asal){
         printf("Uang anda sekarang adalah : %d rupiah\n", *uang_asal);
 
 }
-
-int main(){
-    int uang_asal = 5000;
-    printf("Uang awal Anda : %d rupiah\n", uang_asal);
-    work(&uang_asal);
-    return 0;
-}
-    
