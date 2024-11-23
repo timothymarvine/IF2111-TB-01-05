@@ -47,4 +47,6 @@ Queue Request(Queue q);
 
 void DisplayQueue(Queue q);
 
+boolean strCmpr(char *a, char *b);
+
 #endif

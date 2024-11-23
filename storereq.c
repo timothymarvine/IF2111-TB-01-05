@@ -99,13 +99,55 @@ void DisplayQueue(Queue q){
     }
 }
 
+void Supply(Queue q){
+	char *jawab;
+	int harga;
+	int i = 0;
+	while(!IsEmpty(q)){
+		printf("Apakah kamu ingin menambahkan barang %s: ", HEAD(q));
+		scanf("%s", jawab);
+
+		char *terima = "Terima", *tunda = "Tunda", *tolak = "Tolak";
+
+		if(strCmpr(jawab, terima)){
+			printf("Harga barang: ");
+			scanf("%d", &harga);
+
+			// Insert list disini
+
+			dequeue(&q);
+		} else if(strCmpr(jawab, tunda)){
+			enqueue(&q, HEAD(q));
+			dequeue(&q);
+		} else if(strCmpr(jawab, tolak)){
+			dequeue(&q);
+		}
+	}
+}
+
+boolean strCmpr(char *a, char *b){
+	boolean status = false;
+	for(int i = 0; i < 50; i++){
+		if(*a == '\0'){
+			break;
+		} else if(*a != *b){
+			return false;
+		} else {
+			status = true;
+			a++; b++;
+		}
+	}
+
+	return status;
+}
+
 int main(void){
 	Queue q;
 	CreateQueue(&q);
 
-	Request(q);
+	q = Request(q);
 
-	Produk antri = "ano";
-	printf("%c", antri[1]);
+	Supply(q);
+
 	DisplayQueue(q);
 }
