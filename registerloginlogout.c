@@ -10,145 +10,145 @@ typedef struct {
 } User;
 
 typedef struct {
-    User users[MAX_USERS];
-    int userCount;
-    char currentSession[MAX_LENGTH]; 
+    User userList[MAX_USERS];
+    int totalUsers;
+    char activeSession[MAX_LENGTH];
 } System;
 
-void initializeSystem(System *system) {
-    system->userCount = 0;
-    system->currentSession[0] = '\0';
+void initialize(System *sys) {
+    sys->totalUsers = 0;
+    sys->activeSession[0] = '\0'; // Tidak ada sesi aktif
 }
 
-int stringLength(const char *str) {
-    int len = 0;
-    while (str[len] != '\0') {
-        len++;
+int calculateStringLength(const char *str) {
+    int count = 0;
+    while (str[count] != '\0') {
+        count++;
     }
-    return len;
+    return count;
 }
 
-int stringCompare(const char *str1, const char *str2) {
-    int i = 0;
-    while (str1[i] != '\0' && str2[i] != '\0') {
-        if (str1[i] != str2[i]) {
-            return 0; 
+int compareStrings(const char *a, const char *b) {
+    int index = 0;
+    while (a[index] != '\0' && b[index] != '\0') {
+        if (a[index] != b[index]) {
+            return 0; // String berbeda
         }
-        i++;
+        index++;
     }
-    return str1[i] == '\0' && str2[i] == '\0';
+    return a[index] == '\0' && b[index] == '\0'; // Sama jika selesai bersamaan
 }
 
-void stringCopy(char *dest, const char *src) {
-    int i = 0;
-    while (src[i] != '\0') {
-        dest[i] = src[i];
-        i++;
+void copyString(char *destination, const char *source) {
+    int index = 0;
+    while (source[index] != '\0') {
+        destination[index] = source[index];
+        index++;
     }
-    dest[i] = '\0';
+    destination[index] = '\0'; // Tambahkan null-terminator
 }
 
-void readLine(char *buffer, int maxLength) {
+void getInputLine(char *buffer, int size) {
     int i = 0;
-    char ch;
-    while (i < maxLength - 1 && (ch = getchar()) != '\n' && ch != EOF) {
-        buffer[i++] = ch;
+    char c;
+    while (i < size - 1 && (c = getchar()) != '\n' && c != EOF) {
+        buffer[i++] = c;
     }
     buffer[i] = '\0';
 }
 
-int isUsernameTaken(System *system, const char *username) {
-    for (int i = 0; i < system->userCount; i++) {
-        if (stringCompare(system->users[i].username, username)) {
-            return 1; 
+int usernameExists(System *sys, const char *username) {
+    for (int i = 0; i < sys->totalUsers; i++) {
+        if (compareStrings(sys->userList[i].username, username)) {
+            return 1; // Username sudah digunakan
         }
     }
-    return 0;
+    return 0; // Username tersedia
 }
 
-void registerUser(System *system, const char *username, const char *password) {
-    if (isUsernameTaken(system, username)) {
+void registerAccount(System *sys, const char *username, const char *password) {
+    if (usernameExists(sys, username)) {
         printf("Akun dengan username %s gagal dibuat. Silakan lakukan REGISTER ulang.\n", username);
         return;
     }
-    if (system->userCount < MAX_USERS) {
-        stringCopy(system->users[system->userCount].username, username);
-        stringCopy(system->users[system->userCount].password, password);
-        system->userCount++;
+    if (sys->totalUsers < MAX_USERS) {
+        copyString(sys->userList[sys->totalUsers].username, username);
+        copyString(sys->userList[sys->totalUsers].password, password);
+        sys->totalUsers++;
         printf("Akun dengan username %s telah berhasil dibuat. Silakan LOGIN untuk melanjutkan.\n", username);
     } else {
         printf("Sistem penuh, tidak bisa menambahkan akun baru.\n");
     }
 }
 
-int findUser(System *system, const char *username, const char *password) {
-    for (int i = 0; i < system->userCount; i++) {
-        if (stringCompare(system->users[i].username, username) &&
-            stringCompare(system->users[i].password, password)) {
-            return 1; 
+int findUser(System *sys, const char *username, const char *password) {
+    for (int i = 0; i < sys->totalUsers; i++) {
+        if (compareStrings(sys->userList[i].username, username) &&
+            compareStrings(sys->userList[i].password, password)) {
+            return 1; // Pengguna ditemukan
         }
     }
-    return 0;
+    return 0; // Pengguna tidak ditemukan
 }
 
-void login(System *system, const char *username, const char *password) {
-    if (system->currentSession[0] != '\0') {
-        printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", system->currentSession);
+void loginUser(System *sys, const char *username, const char *password) {
+    if (sys->activeSession[0] != '\0') {
+        printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", sys->activeSession);
         return;
     }
 
-    if (findUser(system, username, password)) {
-        stringCopy(system->currentSession, username);
+    if (findUser(sys, username, password)) {
+        copyString(sys->activeSession, username);
         printf("Anda telah login ke PURRMART sebagai %s.\n", username);
     } else {
         printf("Username atau password salah.\n");
     }
 }
 
-void logout(System *system) {
-    if (system->currentSession[0] == '\0') {
+void logoutUser(System *sys) {
+    if (sys->activeSession[0] == '\0') {
         printf("Tidak ada sesi login yang aktif.\n");
         return;
     }
 
-    printf("%s telah logout dari sistem PURRMART. Silakan REGISTER/LOGIN kembali untuk melanjutkan.\n", system->currentSession);
-    system->currentSession[0] = '\0';
+    printf("%s telah logout dari sistem PURRMART. Silakan REGISTER/LOGIN kembali untuk melanjutkan.\n", sys->activeSession);
+    sys->activeSession[0] = '\0'; // Reset sesi
 }
 
 int main() {
-    System system;
-    initializeSystem(&system);
+    System sys;
+    initialize(&sys);
 
     char command[MAX_LENGTH];
     char username[MAX_LENGTH];
     char password[MAX_LENGTH];
 
     while (1) {
-        printf("\n>> "); // Prompt command
-        readLine(command, MAX_LENGTH);
+        printf("\n>> ");
+        getInputLine(command, MAX_LENGTH);
 
-        if (stringCompare(command, "REGISTER")) {
+        if (compareStrings(command, "REGISTER")) {
             printf("Username: ");
-            readLine(username, MAX_LENGTH);
+            getInputLine(username, MAX_LENGTH);
 
             printf("Password: ");
-            readLine(password, MAX_LENGTH);
+            getInputLine(password, MAX_LENGTH);
 
-            registerUser(&system, username, password);
+            registerAccount(&sys, username, password);
 
-        } else if (stringCompare(command, "LOGIN")) {
+        } else if (compareStrings(command, "LOGIN")) {
             printf("Username: ");
-            readLine(username, MAX_LENGTH);
+            getInputLine(username, MAX_LENGTH);
 
             printf("Password: ");
-            readLine(password, MAX_LENGTH);
+            getInputLine(password, MAX_LENGTH);
 
-            login(&system, username, password);
+            loginUser(&sys, username, password);
 
-        } else if (stringCompare(command, "LOGOUT")) {
-            logout(&system);
+        } else if (compareStrings(command, "LOGOUT")) {
+            logoutUser(&sys);
 
-        } else if (stringCompare(command, "EXIT")) {
+        } else if (compareStrings(command, "EXIT")) {
             printf("Keluar dari sistem PURRMART.\n");
             break;
 
