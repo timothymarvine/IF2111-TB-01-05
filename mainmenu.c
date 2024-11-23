@@ -6,10 +6,10 @@
 #include "mesinkarakter.h"
 
 int main() {
-    char convertwsmm[50]; // Ubah menjadi array karakter untuk menampung string
+    char convertwsmm[50];
     char command[10];
-    int isLoggedIn = 0; // Status login pengguna (0 = tidak login, 1 = login)
-    int running = 1;    // Status jalannya program (0 = berhenti, 1 = berjalan)
+    int isLoggedIn = 0;
+    int running = 1;
     int uang_asal = 5000;
     char kesempatan;
 
@@ -66,7 +66,7 @@ int main() {
         } else {
             // Menampilkan Main Menu setelah Login
             MainMenu();
-            STARTWORD();
+            STARTSENTENCE();
             WordToString(currentWord, convertwsmm); // Menggunakan array char untuk string
 
             for (int i = 0; i < currentWord.Length; i++) {
