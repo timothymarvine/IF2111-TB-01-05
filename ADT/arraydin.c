@@ -107,7 +107,7 @@ ArrayDin CopyArrayDin(ArrayDin array) {
 
 boolean SearchArrayDin(ArrayDin array, char *el) {
     for (int i = 0; i < array.Neff; i++) {
-        if (array.A[i].name == el) {
+        if (strCmpr(array.A[i].name, el)) {
             return 1;
         }
     }

@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 boolean IsEmpty(Queue q){
-	return IDX_HEAD(q) == IDX_UNDEF && IDX_TAIL(q) == IDX_UNDEF;
+	return (IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF);
 }
 
 boolean IsFull(Queue q){
@@ -37,15 +37,15 @@ void enqueue(Queue *q, Produk x){
 	strCopy(TAIL(*q), x);
 }
 
-Queue dequeue(Queue q){
-	if(IDX_HEAD(q) == IDX_TAIL(q)){
-		IDX_HEAD(q) = IDX_UNDEF;
-		IDX_TAIL(q) = IDX_UNDEF;
+void dequeue(Queue *q){
+	if(IDX_HEAD(*q) == IDX_TAIL(*q)){
+		IDX_HEAD(*q) = IDX_UNDEF;
+		IDX_TAIL(*q) = IDX_UNDEF;
 	} else {
-		IDX_HEAD(q) = (IDX_HEAD(q) + 1) % (IDX_MAX + 1); 
+		IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % (IDX_MAX + 1); 
 	}
 
-    return q;
+    // return q;
 }
 
 void DisplayQueue(Queue q){
@@ -77,16 +77,23 @@ boolean IsMemberQ(Queue q, Produk x){
 	return strCmpr(x, q.Tab[i]);
 }
 
-boolean strCmpr(char *dest, char *src){
-	while (*dest != '\0' && *src != '\0') {
-        if (*dest != *src) {
-            return 0;
-        }
-        dest++;
-        src++;
-    }
+// boolean strCmpr(char *dest, char *src){
+// 	while (*dest != '\0' && *src != '\0') {
+//         if (*dest != *src) {
+//             return 0;
+//         }
+//         dest++;
+//         src++;
+//     }
 
-    return (*dest == '\0' && *src == '\0');
+//     return (*dest == '\0' && *src == '\0');
+// }
+
+boolean strCmpr(char *a, char *b) {
+    while (*a && *b) {
+        if (*a++ != *b++) return false;
+    }
+    return *a == '\0' && *b == '\0';
 }
 
 void strCopy(Produk dest, Produk src){

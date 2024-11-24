@@ -30,7 +30,7 @@ void CreateQueue (Queue * Q);
 
 void enqueue (Queue * Q, Produk X);
 
-Queue dequeue (Queue Q);
+void dequeue (Queue * Q);
 
 boolean IsMemberQ(Queue Q, Produk x);
 

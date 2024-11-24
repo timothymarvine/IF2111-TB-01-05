@@ -3,8 +3,8 @@
 
 #include "ADT\arraydin.h"
 
-Queue Request(Queue q, ArrayDin list);
+void Request(Queue *q, ArrayDin *list);
 
-void Supply(Queue q, ArrayDin list);
+void Supply(Queue *q, ArrayDin *list);
 
 #endif
