@@ -9,6 +9,7 @@
 #define NMax 50
 #define BLANK ' '
 #define NEWLINE '\n'
+#define MAX_LEN 100
 
 typedef struct
 {
@@ -70,7 +71,7 @@ void CopyWord();
 void CopySentence();
 /* Mengakuisisi kata satu persatu */ 
 
-int Strlen(char *s);
+int Strlen(const char *s);
 /* Mengembalikan panjang string s */
 
 void WordToString(Word Kata, char *s);
@@ -100,5 +101,7 @@ void PrintKata(Word Kata);
 /* Proses : Menuliskan tipe bentukan kata ke layar
    I.S. : Word terdefinisi
    F.S. : kata yang disimpan dalam Word Kata tertulis di layar */
+
+boolean isWordEqual(const char *stringInput, char sample[MAX_LEN]);
 
 #endif
