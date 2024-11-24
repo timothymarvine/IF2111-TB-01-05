@@ -9,6 +9,11 @@ void W0RDL399(){
 }
 
 void workChallenge(int *uang_asal){
+        if (*uang_asal <= 0) {
+        printf("Uang anda tidak cukup untuk memulai challenge! Silakan bekerja terlebih dahulu pada menu work.\n");
+        return;
+        }
+
     int pilihanchallenge;
     char apapun;
     printf("Daftar challenge yang tersedia: \n");
