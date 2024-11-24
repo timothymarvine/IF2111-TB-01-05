@@ -67,13 +67,21 @@ void loginUser(System *sys, const char *username, const char *password, int *log
     }
 
     if (findUser(sys, username, password)) {
-        // CopyWord(sys->activeUser);
+        // Manual copy username to sys->activeUser
+        int i = 0;
+        while (username[i] != '\0' && i < sizeof(sys->activeUser) - 1) {
+            sys->activeUser[i] = username[i];
+            i++;
+        }
+        sys->activeUser[i] = '\0';  // Null terminate the string
+
         printf("Anda telah login ke PURRMART sebagai %s.\n", username);
         *loggedIn = 1;
     } else {
         printf("Username atau password salah.\n");
     }
 }
+
 
 void logoutUser(System *sys, int *isLoggedIn) {
     printf("%s telah logout dari sistem PURRMART. Silakan REGISTER/LOGIN kembali untuk melanjutkan.\n", sys->activeUser);
