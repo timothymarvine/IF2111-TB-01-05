@@ -5,12 +5,13 @@
 #include "boolean.h"
 #include "wordl399.h"
 #include "mesinkata.h"  // Menggunakan mesin kata untuk input
+#include "mesinkarakter.h"
 
 // Konstanta permainan
 #define BIAYA_PERMAINAN 500
 #define HADIAH 1500
 #define PANJANG_KATA 5
-#define MAX_PELUANG 5
+#define MAX_PELUANG 6
 
 // Daftar kata yang bisa dipilih secara acak
 const char *daftar_kata[] = {"STEIK", "CISCO", "JAKET", "HUJAN", "LUCKY"};
@@ -20,9 +21,16 @@ const int ukuran_daftar_kata = 5;
 void pilih_kata_acak(char *kata_terpilih);
 void proses_tebakan(const char *tebakan, const char *target, char *hasil);
 void tampilkan_progress(char tebakan[MAX_PELUANG][PANJANG_KATA * 2 + 1], int peluang);
-void main_permainan_wordl399(int *saldo_pengguna);
+void WORDL399(int *saldo_pengguna);
 int bandingkan_string(const char *str1, const char *str2);
-int string_length(const char *str);
+int string_length(const char *str){
+    int length = 0;
+    while (str[length] != '\0')
+    {
+        length++;
+    }
+    return length;
+}
 
 
 // Fungsi untuk memilih kata acak dari kumpulan kata
@@ -96,7 +104,7 @@ void tampilkan_progress(char tebakan[MAX_PELUANG][PANJANG_KATA * 2 + 1], int pel
 }
 
 // Fungsi utama permainan W0RDL399
-void main_permainan_wordl399(int *saldo_pengguna) {
+void WORDL399(int *saldo_pengguna) {
     if (*saldo_pengguna < BIAYA_PERMAINAN) {
         printf("Uang Anda tidak cukup untuk memainkan W0RDL399.\n");
         return;
@@ -109,17 +117,19 @@ void main_permainan_wordl399(int *saldo_pengguna) {
     pilih_kata_acak(kata_target);  // Memilih kata acak
 
     char tebakan[MAX_PELUANG][PANJANG_KATA * 2 + 1] = {0};  // Menyimpan tebakan pemain
+    char tebakan_input[PANJANG_KATA + 1];
     int peluang = 0;
     bool tebakan_benar = false;
-
+    char temp[PANJANG_KATA+1];
     while (peluang < MAX_PELUANG && !tebakan_benar) {
-        tampilkan_progress(tebakan, peluang);  // Menampilkan progres permainan
+        tampilkan_progress(tebakan, peluang + 1);  // Menampilkan progres permainan
 
-        char tebakan_input[PANJANG_KATA + 1];
+        
         printf("Masukkan kata tebakan Anda: ");
         
         STARTWORD();  // Menggunakan mesinkata untuk membaca input kata
-        
+        WordToString(currentWord,temp);
+
         // Menyalin kata yang dimasukkan ke dalam tebakan
         for (int i = 0; i < PANJANG_KATA; i++) {
             tebakan_input[i] = currentWord.TabWord[i];
@@ -127,18 +137,18 @@ void main_permainan_wordl399(int *saldo_pengguna) {
         tebakan_input[PANJANG_KATA] = '\0'; // Menambahkan null terminator
 
         // Validasi panjang kata
-        if (string_length(tebakan) != PANJANG_KATA) {
+        if (string_length(tebakan_input) != PANJANG_KATA) {
             printf("Kata harus terdiri dari %d huruf. Coba lagi.\n", PANJANG_KATA);
             continue;
         }
 
         // Memproses tebakan
-        proses_tebakan(tebakan, kata_target, tebakan[peluang]);
+        proses_tebakan(tebakan_input, kata_target, tebakan[peluang]);
         printf("Hasil:\n");
         tampilkan_progress(tebakan, peluang + 1);
 
         // Memeriksa apakah tebakan benar
-        if (bandingkan_string(tebakan, kata_target) == 0) {
+        if (bandingkan_string(tebakan_input, kata_target) == 0) {
             tebakan_benar = true;
             printf("Selamat, Anda menang!\n");
             printf("+%d rupiah telah ditambahkan ke akun Anda.\n", HADIAH);
