@@ -22,6 +22,7 @@ void WelcomeMenu() {
     printf("|                 1. START                 |\n");
     printf("|                 2. LOAD                  |\n");
     printf("|                 3. HELP                  |\n");
+    printf("|                 4. QUIT                  |\n");
     printf("===========================================\n");
     printf("           Masukkan pilihanmu: ");
 }
@@ -32,6 +33,7 @@ void LoginMenu() {
     printf("|                 1. LOGIN                 |\n");
     printf("|                 2. REGISTER              |\n");
     printf("|                 3. HELP                  |\n");
+    printf("|                 4. QUIT                  |\n");
     printf("===========================================\n");
     printf("           Masukkan pilihanmu: ");
 }
@@ -71,17 +73,16 @@ void helpinmain(){
 // Fungsi untuk menjalankan Main Menu setelah Login
 void MainMenu() {
     printf("\n========================= Main Menu ==========================\n");
-    printf("|                       INPUT SAMBUNG SEMUA!                 |\n");
-    printf("|                           1. WORK                          |\n");
-    printf("|                      2. WORKCHALLENGE                      |\n");
-    printf("|                        3. STORELIST                        |\n");
-    printf("|                       4. STOREREQUEST                      |\n");
-    printf("|                       5. STORESUPPLY                       |\n");
-    printf("|                       6. STOREREMOVE                       |\n");
-    printf("|                          7. LOGOUT                         |\n");
-    printf("|                           8. SAVE                          |\n");
-    printf("|                           9. QUIT                          |\n");
-    printf("|  10. HELP -> Untuk melihat masing-masing kegunaan command  |\n");
-    printf("=============================================================\n");
+    printf("|                           1. WORK                           |\n");
+    printf("|                      2. WORK CHALLENGE                      |\n");
+    printf("|                        3. STORE LIST                        |\n");
+    printf("|                       4. STORE REQUEST                      |\n");
+    printf("|                       5. STORE SUPPLY                       |\n");
+    printf("|                       6. STORE REMOVE                       |\n");
+    printf("|                          7. LOGOUT                          |\n");
+    printf("|                           8. SAVE                           |\n");
+    printf("|                           9. QUIT                           |\n");
+    printf("|  10. HELP -> Untuk melihat masing-masing kegunaan command   |\n");
+    printf("==============================================================\n");
     printf("                      Masukkan pilihanmu: ");
 }
