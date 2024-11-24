@@ -10,7 +10,7 @@ int main() {
     char command[10];
     int isLoggedIn = 0;
     int running = 1;
-    int uang_asal = 5000;
+    int uang_asal = 0;
     char kesempatan;
 
     while (running) {
@@ -31,7 +31,7 @@ int main() {
                 while (loginMenuActive) {
                     LoginMenu();
                     STARTWORD();
-                    WordToString(currentWord, convertwsmm); // Menggunakan array char untuk string
+                    WordToString(currentWord, convertwsmm);
                     for (int i = 0; i < currentWord.Length; i++) {
                         command[i] = convertwsmm[i];
                     }
@@ -67,7 +67,7 @@ int main() {
             // Menampilkan Main Menu setelah Login
             MainMenu();
             STARTSENTENCE();
-            WordToString(currentWord, convertwsmm); // Menggunakan array char untuk string
+            WordToString(currentWord, convertwsmm);
 
             for (int i = 0; i < currentWord.Length; i++) {
                 command[i] = convertwsmm[i];
