@@ -3,6 +3,9 @@
 #include <time.h>
 #include "boolean.h"
 #include "tebakangka.h"
+#include "mesinkata.h"
+#include "mesinkarakter.h"
+#include "menu.h"
 
 int generateRandomNumber(int min, int max) {
     time_t t;
@@ -20,6 +23,7 @@ int generateRandomNumber(int min, int max) {
 void tebakAngka(int *uang_asal){
     int biaya_main = 200, tebakAngka, RNGnumber, hadiah = 500, hadiah_sisa_uang;
     int kesempatan = 10;
+    char convert;
     boolean tebakanBenar = false;
     if (*uang_asal < biaya_main){
         printf("Uang Anda tidak cukup!");
@@ -35,7 +39,9 @@ void tebakAngka(int *uang_asal){
 
     while(kesempatan > 0 && tebakanBenar == false){
         printf("Tebak Angka = ");
-        scanf("%d", &tebakAngka);
+        STARTWORD();
+        WordToString(currentWord, &convert);
+        tebakAngka = stringToInteger(&convert);
         if (tebakAngka < RNGnumber){
             printf("Tebakanmu lebih kecil!\n");
         }else if(tebakAngka > RNGnumber){
