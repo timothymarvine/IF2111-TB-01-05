@@ -5,6 +5,7 @@
 #include "mesinkata.h"
 #include "mesinkarakter.h"
 #include "array.h"
+#include "console.h"
 
 int main() {
     char convertwsmm[50];
