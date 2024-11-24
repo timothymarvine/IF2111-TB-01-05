@@ -49,13 +49,13 @@ void tebakAngka(int *uang_asal){
         }else if(tebakAngka == RNGnumber){
             tebakanBenar = true;
             if(kesempatan == 10){
-                hadiah_sisa_uang = 550;
+                hadiah_sisa_uang = 500;
                 printf("Tebakanmu benar! %d rupiah telah ditambahkan ke akun Anda\n",hadiah_sisa_uang);
                 *uang_asal += hadiah_sisa_uang;
                 printf("Uang anda sekarang adalah = %d.\n", *uang_asal);
                 return;
             }else{
-                hadiah_sisa_uang = 550 - 50*(10-kesempatan);
+                hadiah_sisa_uang = 500 - 50*(10-kesempatan);
                 printf("Tebakanmu benar! %d rupiah telah ditambahkan ke akun Anda\n",hadiah_sisa_uang);
                 *uang_asal += hadiah_sisa_uang;
                 printf("Uang anda sekarang adalah = %d.\n", *uang_asal);
@@ -65,7 +65,8 @@ void tebakAngka(int *uang_asal){
     kesempatan--;
     printf("Sisa kesempatan adalah %d.\n\n", kesempatan);
     }
-    hadiah_sisa_uang = 550 - 50*(10-kesempatan);
-    printf("Kesempatan Anda sudah habis. Angka yang benar adalah %d. Uang Anda tersisa %d\n", RNGnumber, hadiah_sisa_uang);
+    hadiah_sisa_uang = 500 - 50*(10-kesempatan);
+    *uang_asal -= hadiah_sisa_uang;
+    printf("Kesempatan Anda sudah habis. Angka yang benar adalah %d. Uang Anda tersisa %d\n", RNGnumber, *uang_asal);
     
 }
