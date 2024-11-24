@@ -23,6 +23,7 @@ void tebakAngka(int *uang_asal){
     boolean tebakanBenar = false;
     if (*uang_asal < biaya_main){
         printf("Uang Anda tidak cukup!");
+        return;
     }
 
     *uang_asal -= biaya_main;
