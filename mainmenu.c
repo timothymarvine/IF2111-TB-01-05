@@ -4,6 +4,7 @@
 #include "work.h"
 #include "mesinkata.h"
 #include "mesinkarakter.h"
+#include "rll.h"
 
 int main() {
     char convertwsmm[50];
@@ -12,6 +13,8 @@ int main() {
     int running = 1;
     int uang_asal = 0;
     char kesempatan;
+    System system;
+    initializeSystem(&system);
 
     while (running) {
         if (!isLoggedIn) {
@@ -27,8 +30,8 @@ int main() {
 
             if (manual_strcmp(command, "START") == 0) {
                 // Masuk ke Login Menu
-                int loginMenuActive = 1;
-                while (loginMenuActive) {
+                // int loginMenuActive = 1;
+                while (1) {
                     LoginMenu();
                     STARTWORD();
                     WordToString(currentWord, convertwsmm);
@@ -39,18 +42,38 @@ int main() {
                     printf("\n");
 
                     if (manual_strcmp(command, "LOGIN") == 0) {
-                        printf("\nLogin successful!\n");
-                        isLoggedIn = 1;
-                        loginMenuActive = 0;
+                        printf("Masukkan username: ");
+                        STARTWORD();
+                        char username[MAX_LENGTH];
+                        WordToString(currentWord, username);
+
+                        printf("Masukkan password: ");
+                        STARTWORD();
+                        char password[MAX_LENGTH];
+                        WordToString(currentWord, password);
+
+                        loginUser(&system, username, password, &isLoggedIn);
+                        if(isLoggedIn) break;
+
                     } else if (manual_strcmp(command, "REGISTER") == 0) {
-                        printf("\nRegistration successful! Now you can login.\n");
+                        char username[MAX_LENGTH];
+                        printf("Masukkan username: ");
+                        STARTWORD();
+                        WordToString(currentWord, username);
+
+                        char password[MAX_LENGTH];
+                        printf("Masukkan password: ");
+                        STARTWORD();
+                        WordToString(currentWord, password);
+
+                        registerUser(&system, username, password);
                     } else if (manual_strcmp(command, "HELP") == 0) {
                         helpinlogin();
                     } else if (manual_strcmp(command, "QUIT") == 0) {
                         printf("\nExiting program...\n");
                         return 0;
                     } else {
-                        printf("\nInvalid command. Please try again.\n");
+                        printf("\nCommand tidak dikenali. Gunakan REGISTER, LOGIN, atau EXIT.\n");
                     }
                 }
             } else if (manual_strcmp(command, "LOAD") == 0) {
@@ -84,6 +107,8 @@ int main() {
                 work(&uang_asal);
             } else if (manual_strcmp(command, "WORK CHALLENGE") == 0) {
                 workChallenge(&uang_asal);
+            } else if (manual_strcmp(command, "LOGOUT") == 0){
+                logoutUser(&system, &isLoggedIn);
             } else {
                 printf("\nInvalid command. Please try again.\n");
             }
