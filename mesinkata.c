@@ -102,7 +102,7 @@ void ADVSENTENCE(){
 }
 /* Digunakan pada STARTWORD2 */
 
-int Strlen(char *s){
+int Strlen(const char *s){
     int i = 0;
     while (s[i]!='\0'){
         i++;
@@ -256,3 +256,21 @@ void PrintKata(Word Kata){
 /* Proses : Menuliskan tipe bentukan kata ke layar
    I.S. : Word terdefinisi
    F.S. : kata yang disimpan dalam Word Kata tertulis di layar */
+
+boolean isWordEqual(const char *stringInput, char sample[MAX_LEN]) {
+    int i;
+
+    // Periksa apakah panjang currentWord sama dengan panjang stringInput
+    if (Strlen(sample) != Strlen(stringInput)) {
+        return false; // Panjang berbeda, langsung return false
+    }
+
+    // Bandingkan karakter satu per satu
+    for (i = 0; i < Strlen(sample); i++) {
+        if (sample[i] != stringInput[i]) {
+            return false; // Jika ada karakter berbeda, return false
+        }
+    }
+
+    return true; // Semua karakter sama
+}
