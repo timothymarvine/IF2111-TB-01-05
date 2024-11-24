@@ -1,13 +1,15 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
-#include "..\boolean.h"
-#include "storereq.h"
+#include"queue.h"
 
 #define InitialSize 10
 
-typedef int IdxType;
-typedef int ElType;
+typedef struct {
+	char name[50];
+	int price;
+} Barang;
+
 typedef struct {
     Barang *A;
     int Capacity;
