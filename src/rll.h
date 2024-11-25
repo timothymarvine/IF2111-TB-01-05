@@ -3,26 +3,29 @@
 
 #define MAX_USERS 100
 #define MAX_LENGTH 100
+
+#include "load.h"
+
 typedef struct {
     char username[MAX_LENGTH];
     char password[MAX_LENGTH];
-} User;
+} UserData;
 
 typedef struct {
-    User users[MAX_USERS];
+    UserData users[MAX_USERS];
     int totalUsers;
     char activeUser[MAX_LENGTH];
 } System;
 
 void initializeSystem(System *sys);
 
-int isUsernameTaken(System *sys, const char *username);
+int isUsernameTaken(System *sys, const char *username, User user[]);
 
-void registerUser(System *sys, const char *username, const char *password);
+void registerUser(System *sys, const char *username, const char *password, User user[]);
 
-int findUser(System *sys, const char *username, const char *password);
+int findUser(System *sys, const char *username, const char *password, User user[]);
 
-void loginUser(System *sys, const char *username, const char *password, int *loggedIn);
+void loginUser(System *sys, const char *username, const char *password, int *loggedIn, User user[]);
 
 void logoutUser(System *sys, int *isLoggedIn);
 

@@ -4,8 +4,8 @@
 #include <time.h>
 #include "boolean.h"
 #include "wordl399.h"
-#include "mesinkata.h"  // Menggunakan mesin kata untuk input
-#include "mesinkarakter.h"
+#include "ADT\mesinkata\mesinkata.h"  // Menggunakan mesin kata untuk input
+#include "ADT\mesinkarakter\mesinkarakter.h"
 
 // Konstanta permainan
 #define BIAYA_PERMAINAN 500

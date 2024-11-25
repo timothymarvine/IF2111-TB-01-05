@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include "workChallenge.h"
 #include "tebakangka.h"
+#include "WORDL399.h"
 #include "ADT\mesinkata\mesinkata.h"
 #include "ADT\mesinkarakter\mesinkarakter.h"
-
-void W0RDL399(){
-    printf("Lagi proses");
-}
 
 void workChallenge(int *uang_asal){
         if (*uang_asal <= 0) {
@@ -30,7 +27,7 @@ void workChallenge(int *uang_asal){
             tebakAngka(uang_asal);
             break;
         case 2:
-            W0RDL399();
+            WORDL399(uang_asal);
             break;
         default:
             printf("Pilihanmu tidak ada!");
