@@ -1,67 +1,48 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../ADT/mesinkata.h"
+#include "../ADT/mesinkarakter.h"
+#include "LOGIN.h"
 
-#define MAX_USERS 100
-#define MAX_LENGTH 50
+boolean login;
+char name[50];
 
-typedef struct {
-    char username[MAX_LENGTH];
-    char password[MAX_LENGTH];
-} User;
+void LoginUser() {
+    Total userDatabase;
+    char username[50], password[50];
+    
+    printf("Username: ");
+    STARTWORD2();
+    int i = 0;
+    while (currentWord.TabWord[i] != '\0') {
+        username[i] = currentWord.TabWord[i];
+        currentWord.TabWord[i] = '\0';
+        i++;
+    }
+    username[i] = '\0';
+    
+    printf("Password: ");
+    STARTWORD2();
+    int j = 0;
+    while (currentWord.TabWord[j] != '\0') {
+        password[j] = currentWord.TabWord[j];
+        currentWord.TabWord[j] = '\0';
+        j++;
+    }
+    password[j] = '\0';
 
-typedef struct {
-    User users[MAX_USERS];
-    int userCount;
-    char currentSession[MAX_LENGTH];
-} System;
-
-void initializeSystem(System *system) {
-    system->userCount = 0;
-    strcpy(system->currentSession, "");
-}
-
-int findUser(System *system, const char *username, const char *password) {
-    for (int i = 0; i < system->userCount; i++) {
-        if (strcmp(system->users[i].username, username) == 0 &&
-            strcmp(system->users[i].password, password) == 0) {
-            return 1;
+    for (int k = 0; k < 50; k++) {
+        if (isEqual(username, userDatabase.TotUs[k].name)) {
+            if (isEqual(password, userDatabase.TotUs[k].password)) {
+                printf("Login Berhasil!\n");
+                login = true;
+                for (int l = 0; username[l] != '\0'; l++) {
+                    name[l] = username[l];
+                }
+                name[i] = '\0';
+                return;
+            }
         }
     }
-    return 0;
-}
-
-void login(System *system, const char *username, const char *password) {
-    if (strcmp(system->currentSession, "") != 0) {
-        printf("Anda masih tercatat sebagai %s. Silakan LOGOUT terlebih dahulu.\n", system->currentSession);
-        return;
-    }
-
-    if (findUser(system, username, password)) {
-        strcpy(system->currentSession, username);
-        printf("Anda telah login ke PURRMART sebagai %s.\n", username);
-    } else {
-        printf("Username atau password salah.\n");
-    }
-}
-
-int main() {
-    System system;
-    initializeSystem(&system);
-
-    strcpy(system.users[0].username, "johndoe");
-    strcpy(system.users[0].password, "janedoe");
-    system.userCount++;
-
-    char username[MAX_LENGTH];
-    char password[MAX_LENGTH];
-
-    printf("Username: ");
-    scanf("%s", username);
-    printf("Password: ");
-    scanf("%s", password);
-
-    login(&system, username, password);
-
-    return 0;
+    printf("Username/Password salah!\n");
+    MULAI();
 }
