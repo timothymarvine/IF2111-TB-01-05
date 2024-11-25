@@ -11,6 +11,8 @@
 #define NEWLINE '\n'
 #define MAX_LEN 100
 
+typedef char Produk[50];
+
 typedef struct
 {
    char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
@@ -103,5 +105,17 @@ void PrintKata(Word Kata);
    F.S. : kata yang disimpan dalam Word Kata tertulis di layar */
 
 boolean isWordEqual(const char *stringInput, char sample[MAX_LEN]);
+
+boolean strCmpr(char *a, char *b);
+
+void strCopy(Produk a, Produk b);
+
+boolean isSave(const char *command);
+
+void SaveInterpreter(const char *command, Word *filename);
+
+int WordToInt(Word w);
+
+void WordToCharArray(Word Kata, char *arr);
 
 #endif

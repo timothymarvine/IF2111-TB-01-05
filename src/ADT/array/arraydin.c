@@ -22,23 +22,23 @@ int LengthDin(ArrayDin array) {
     return array.Neff;
 }
 
-char *Get(ArrayDin array, IdxType i) {
+char *GetL(ArrayDin array, IdxType i) {
     return array.A[i].name;
 }
 
-int GetCapacity(ArrayDin array) {
+int GetCapacityL(ArrayDin array) {
     return array.Capacity;
 }
 
-void InsertAt(ArrayDin *array, char *el, IdxType i, int x) {
+void InsertAtL(ArrayDin *array, char *el, IdxType i, int x) {
     int length = LengthDin(*array);
-    int capacity = GetCapacity(*array);
+    int capacity = GetCapacityL(*array);
 
     if (length == capacity) {
         int desiredCapacity = capacity + InitialSize;
         Barang *arr = (Barang *) malloc(desiredCapacity * sizeof(Barang));
         for (int a = 0; a < length; a++) {
-            strCopy(arr[a].name, Get(*array, a));
+            strCopy(arr[a].name, GetL(*array, a));
         }
         free(array->A);
         
@@ -55,16 +55,16 @@ void InsertAt(ArrayDin *array, char *el, IdxType i, int x) {
     array->Neff++;
 }
 
-void InsertLast(ArrayDin *array, Barang el) {
+void InsertLastL(ArrayDin *array, Barang *el) {
     int insertAt = LengthDin(*array);
-    InsertAt(array, el.name, insertAt, el.price);
+    InsertAtL(array, el->name, insertAt, el->price);
 }
 
-void InsertFirst(ArrayDin *array, Barang el) {
-    InsertAt(array, el.name, 0, el.price);
+void InsertFirstL(ArrayDin *array, Barang *el) {
+    InsertAtL(array, el->name, 0, el->price);
 }
 
-void DeleteAt(ArrayDin *array, IdxType i) {
+void DeleteAtL(ArrayDin *array, IdxType i) {
     int length = LengthDin(*array);
     for (int a = i; a < length - 1; a++) {
         array->A[a] = array->A[a + 1];
@@ -72,13 +72,13 @@ void DeleteAt(ArrayDin *array, IdxType i) {
     array->Neff--;
 }
 
-void DeleteLast(ArrayDin *array) {
+void DeleteLastL(ArrayDin *array) {
     int deleteAt = LengthDin(*array) - 1;
-    DeleteAt(array, deleteAt);
+    DeleteAtL(array, deleteAt);
 }
 
-void DeleteFirst(ArrayDin *array) {
-    DeleteAt(array, 0);
+void DeleteFirstL(ArrayDin *array) {
+    DeleteAtL(array, 0);
 }
 
 void PrintArrayDin(ArrayDin array) {
@@ -95,14 +95,6 @@ void PrintArrayDin(ArrayDin array) {
         }
         printf("]\n");
     }
-}
-
-ArrayDin CopyArrayDin(ArrayDin array) {
-    ArrayDin copy = MakeArrayDin();
-    for (int i = 0; i < array.Neff; i++) {
-        InsertLast(&copy, array.A[i]);
-    }
-    return copy;
 }
 
 boolean SearchArrayDin(ArrayDin array, char *el) {

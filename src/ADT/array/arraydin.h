@@ -1,5 +1,5 @@
-#ifndef __ARRAY_DINAMIK__
-#define __ARRAY_DINAMIK__
+#ifndef __ARRAY_DINAMIK_H__
+#define __ARRAY_DINAMIK_H__
 
 #include"..\queue\queue.h"
 
@@ -24,25 +24,25 @@ boolean IsEmptyDin(ArrayDin array);
 
 int LengthDin(ArrayDin array);
 
-char *Get(ArrayDin array, IdxType i);
+char *GetL(ArrayDin array, IdxType i);
 
-int GetCapacity(ArrayDin array);
+int GetCapacityL(ArrayDin array);
 
-void InsertAt(ArrayDin *array, char *el, IdxType i, int x);
+void InsertAtL(ArrayDin *array, char *el, IdxType i, int x);
 
-void InsertLast(ArrayDin *array, Barang el);
+void InsertLastL(ArrayDin *array, Barang *el);
 
-void InsertFirst(ArrayDin *array, Barang el);
+void InsertFirstL(ArrayDin *array, Barang *el);
 
-void DeleteAt(ArrayDin *array, IdxType i);
+void DeleteAtL(ArrayDin *array, IdxType i);
 
-void DeleteLast(ArrayDin *array);
+void DeleteLastL(ArrayDin *array);
 
-void DeleteFirst(ArrayDin *array);
+void DeleteFirstL(ArrayDin *array);
 
 void PrintArrayDin(ArrayDin array);
 
-ArrayDin CopyArrayDin(ArrayDin array);
+// ArrayDin CopyArrayDin(ArrayDin array);
 
 boolean SearchArrayDin(ArrayDin array, char *el);
 

@@ -22,9 +22,13 @@ void IgnoreBlanks(){
 
 void STARTWORD(){
     START();
+    currentWord.Length = 0;
+    for(int i = 0; i < NMax; i++){
+        currentWord.TabWord[i] = '\0';
+    }
     if (pita != NULL){
         IgnoreBlanks();
-        if (currentChar==MARK){
+        if (currentChar==MARK || currentChar==NEWLINE){
             EndWord=true;
         } else {
             EndWord=false;
@@ -41,7 +45,7 @@ void STARTSENTENCE(){
     START();
     if (pita != NULL){
         IgnoreBlanks();
-        if (currentChar==MARK){
+        if (currentChar==MARK || currentChar==NEWLINE){
             EndWord=true;
         } else {
             EndWord=false;
@@ -152,13 +156,10 @@ void WordToString(Word Kata, char *s){
     for (int i = 0; i<Kata.Length; i++){
         s[i]=Kata.TabWord[i];
     }
-    for (int i = Kata.Length; i < Strlen(s); i++) 
-    {
-        if (s[i] != '\0') {
-            s[i] = '\0';
-        }
-    }
+    
+    s[Kata.Length] = '\0';
 }
+
 int stringToInteger(char str[]) 
 {
     int result = 0;     // Variabel untuk menyimpan hasil konversi
@@ -273,4 +274,68 @@ boolean isWordEqual(const char *stringInput, char sample[MAX_LEN]) {
     }
 
     return true; // Semua karakter sama
+}
+
+boolean strCmpr(char *a, char *b) {
+    while (*a && *b) {
+        if (*a++ != *b++) return false;
+    }
+    return *a == '\0' && *b == '\0';
+}
+
+void strCopy(Produk dest, Produk src){
+	for(int i = 0; i < 50; i++){
+		if(src[i] == '\0'){
+			dest[i] = '\0';
+			break;
+		}
+		dest[i] = src[i];
+	}
+}
+
+boolean isSave(const char *command){
+    char save[4] = "SAVE"; int i = 0;
+    while(i < 4){
+        if(command[i] != save[i]){
+            return false;
+        }
+         i++;
+    }
+    return true;
+}
+
+void SaveInterpreter(const char *command, Word *filename){
+    int i = 5;
+    for(int j = 0; j < MAX_LEN; j++){
+        if(command[i] == '\0') break;
+        filename->TabWord[j] = command[i];
+        i++; filename->Length++;
+    }
+    // filename.Length--;
+}
+
+int WordToInt(Word w) {
+    int result = 0;  // Hasil konversi
+    int i;
+
+    // Loop melalui setiap karakter dalam Word
+    for (i = 0; i < w.Length; i++) {
+        // Pastikan karakter valid (angka 0-9)
+        if (w.TabWord[i] >= '0' && w.TabWord[i] <= '9') {
+            result = result * 10 + (w.TabWord[i] - '0');
+        } else {
+            // Jika ada karakter non-angka, keluarkan error
+            printf("Error: Word contains non-numeric character.\n");
+            return -1; // Nilai error
+        }
+    }
+
+    return result;
+}
+
+void WordToCharArray(Word Kata, char *arr) {
+    for (int i = 0; i < Kata.Length; i++) {
+        arr[i] = Kata.TabWord[i];
+    }
+    arr[Kata.Length] = '\0'; // Tambahkan null-terminator
 }
