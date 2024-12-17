@@ -1,7 +1,8 @@
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_
 
-#include "boolean.h"
+#include "..\..\boolean.h"
+#include <stdio.h>
 
 #define MARK ';'
 /* State Mesin */

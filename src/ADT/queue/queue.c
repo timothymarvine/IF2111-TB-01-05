@@ -1,16 +1,16 @@
 #include "queue.h"
 #include <stdio.h>
 
-boolean IsEmpty(Queue q){
+boolean IsEmptyQ(Queue q){
 	return (IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF);
 }
 
-boolean IsFull(Queue q){
+boolean IsFullQ(Queue q){
 	return IDX_HEAD(q) == (IDX_TAIL(q) + 1) % IDX_MAX;
 }
 
-int Length(Queue q){
-	if (IsEmpty(q)) {
+int LengthQ(Queue q){
+	if (IsEmptyQ(q)) {
         return 0;
     }
     if (q.idxTail >= q.idxHead) {
@@ -26,9 +26,9 @@ void CreateQueue(Queue *q){
 }
 
 void enqueue(Queue *q, Produk x){
-	if(IsEmpty(*q)){
+	if(IsEmptyQ(*q)){
 		IDX_HEAD(*q) = 0;
-	} else if(IsFull(*q)){
+	} else if(IsFullQ(*q)){
 		printf("Antrian sudah penuh! Silakan coba lagi nanti!");
 		return;
 	}
@@ -49,7 +49,7 @@ void dequeue(Queue *q){
 }
 
 void DisplayQueue(Queue q){
-	if (IsEmpty(q)) {
+	if (IsEmptyQ(q)) {
         printf("[]\n");
     } else {
         int i = q.idxHead;
@@ -75,33 +75,4 @@ boolean IsMemberQ(Queue q, Produk x){
 	}
 
 	return strCmpr(x, q.Tab[i]);
-}
-
-// boolean strCmpr(char *dest, char *src){
-// 	while (*dest != '\0' && *src != '\0') {
-//         if (*dest != *src) {
-//             return 0;
-//         }
-//         dest++;
-//         src++;
-//     }
-
-//     return (*dest == '\0' && *src == '\0');
-// }
-
-boolean strCmpr(char *a, char *b) {
-    while (*a && *b) {
-        if (*a++ != *b++) return false;
-    }
-    return *a == '\0' && *b == '\0';
-}
-
-void strCopy(Produk dest, Produk src){
-	for(int i = 0; i < 50; i++){
-		if(src[i] == '\0'){
-			dest[i] = '\0';
-			break;
-		}
-		dest[i] = src[i];
-	}
 }

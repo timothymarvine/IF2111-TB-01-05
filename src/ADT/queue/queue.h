@@ -1,12 +1,12 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "..\boolean.h"
+#include "..\..\boolean.h"
+#include "..\mesinkata\mesinkata.h"
 
 #define IDX_MAX 99
 #define IDX_UNDEF -1
 
-typedef char Produk[50];
 typedef int IdxType;
 
 typedef struct {
@@ -20,11 +20,11 @@ typedef struct {
 #define     HEAD(q) (q).Tab[(q).idxHead]
 #define     TAIL(q) (q).Tab[(q).idxTail]
 
-boolean IsEmpty (Queue Q);
+boolean IsEmptyQ (Queue Q);
 
-boolean IsFull (Queue Q);
+boolean IsFullQ (Queue Q);
 
-int Length (Queue Q);
+int LengthQ (Queue Q);
 
 void CreateQueue (Queue * Q);
 
@@ -35,9 +35,5 @@ void dequeue (Queue * Q);
 boolean IsMemberQ(Queue Q, Produk x);
 
 void DisplayQueue(Queue q);
-
-boolean strCmpr(char *a, char *b);
-
-void strCopy(Produk a, Produk b);
 
 #endif

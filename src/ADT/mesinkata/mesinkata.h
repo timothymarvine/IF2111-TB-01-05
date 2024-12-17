@@ -3,12 +3,14 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "boolean.h"
-#include "mesinkarakter.h"
+#include "..\..\boolean.h"
+#include "..\mesinkarakter\mesinkarakter.h"
+#include "..\kustom\datatype.h"
 
 #define NMax 50
 #define BLANK ' '
 #define NEWLINE '\n'
+#define MAX_LEN 100
 
 typedef struct
 {
@@ -70,7 +72,7 @@ void CopyWord();
 void CopySentence();
 /* Mengakuisisi kata satu persatu */ 
 
-int Strlen(char *s);
+int Strlen(const char *s);
 /* Mengembalikan panjang string s */
 
 void WordToString(Word Kata, char *s);
@@ -100,5 +102,19 @@ void PrintKata(Word Kata);
 /* Proses : Menuliskan tipe bentukan kata ke layar
    I.S. : Word terdefinisi
    F.S. : kata yang disimpan dalam Word Kata tertulis di layar */
+
+boolean isWordEqual(const char *stringInput, char sample[MAX_LEN]);
+
+boolean strCmpr(char *a, char *b);
+
+void strCopy(Produk dest, Produk src);
+
+boolean isSave(const char *command);
+
+void SaveInterpreter(const char *command, Word *filename);
+
+int WordToInt(Word w);
+
+void WordToCharArray(Word Kata, char *arr);
 
 #endif
