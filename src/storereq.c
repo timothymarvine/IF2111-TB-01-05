@@ -5,7 +5,7 @@
 void Request(Queue *q, ArrayDin *list){
 	char antri[50];
 	printf("Nama barang yang diminta: ");
-	STARTWORD();
+	STARTSENTENCE();
 	strCopy(antri, currentWord.TabWord);
 
 	if(IsMemberQ(*q, antri)){

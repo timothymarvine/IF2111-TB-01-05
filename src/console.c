@@ -10,9 +10,8 @@ void STORELIST(array StoreList){
 
   printf("List barang yang ada di toko : \n");
   for (int i = 0; i<StoreList.Neff; i++){
-    printf("- "); 
-    PrintKata(StoreList.A[i]); 
-    printf("\n");
+    printf("- ");
+    printf("%s\n", StoreList.A[i].TabWord);
   }
 }
 

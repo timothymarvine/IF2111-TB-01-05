@@ -6,11 +6,6 @@
 #define InitialSize 10
 
 typedef struct {
-	char name[50];
-	int price;
-} Barang;
-
-typedef struct {
     Barang *A;
     int Capacity;
     int Neff;
@@ -41,8 +36,6 @@ void DeleteLastL(ArrayDin *array);
 void DeleteFirstL(ArrayDin *array);
 
 void PrintArrayDin(ArrayDin array);
-
-// ArrayDin CopyArrayDin(ArrayDin array);
 
 boolean SearchArrayDin(ArrayDin array, char *el);
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "menu.h"
 #include "workChallenge.h"
 #include "work.h"
@@ -22,7 +23,7 @@ int main() {
     ArrayDin list = MakeArrayDin();
     User data[MAX_USERS];
     array StoreList = Makearray();
-    Barang apalah[MAX_LEN];
+    Barang stokItem[MAX_LEN];
 
     while (running) {
         if (!isLoggedIn) {
@@ -37,14 +38,14 @@ int main() {
             command[currentWord.Length] = '\0';
 
             if (manual_strcmp(command, "START") == 0) {
-                LOAD("config.txt", apalah, &barangCtr, data, &userCtr);
+                LOAD("config.txt", stokItem, &barangCtr, data, &userCtr);
                 for(int i = 0; i < 1; i++){
                     strCopy(system.users[i].username, data[i].namaUser);
                     strCopy(system.users[i].password, data[i].password);
                     system.totalUsers++;
-                    strCopy(list.A[i].name, apalah[i].name);
-                    strCopy(StoreList.A[i].TabWord, apalah[i].name);
-                    list.A[i].price = apalah[i].price;
+                    strCopy(list.A[i].name, stokItem[i].name);
+                    strCopy(StoreList.A[i].TabWord, stokItem[i].name);
+                    list.A[i].price = stokItem[i].price;
                     list.Neff++; StoreList.Neff++;
                 }
                 while (1) {
@@ -95,7 +96,7 @@ int main() {
                             if(currentWord.TabWord[0] == 'N'){
                                 running = 0;
                             } else if (currentWord.TabWord[0] == 'Y'){
-                                Barang itemData[barangCtr];
+                                Barang *itemData = malloc(barangCtr * sizeof(Barang));
                                 int x = 0;
                                 while(x < barangCtr){
                                     strCopy(itemData[x].name, list.A[x].name);
@@ -108,9 +109,11 @@ int main() {
                                 WordToString(currentWord, fname.TabWord);
                                 SaveInterpreter(command, &fname);
                                 SAVE(fname, itemData, barangCtr, data, userCtr);
+                                free(itemData);
                                 running = 0;
                             }
                             printf("\nExiting program...\n");
+                            delay(3);
                             return 0;
                         }
                     } else {
@@ -120,21 +123,22 @@ int main() {
             } else if (manual_strcmp(command, "LOAD") == 0) {
                 Word filedir;
                 SaveInterpreter(command, &filedir);
-                LOAD(filedir.TabWord, apalah, &barangCtr, data, &userCtr);
+                LOAD(filedir.TabWord, stokItem, &barangCtr, data, &userCtr);
                 for(int i = 0; i < userCtr; i++){
                     strCopy(system.users[i].username, data[i].namaUser);
                     strCopy(system.users[i].password, data[i].password);
                     system.totalUsers++;
                 }
                 for(int i = 0; i < barangCtr; i++){
-                    strCopy(list.A[i].name, apalah[i].name);
-                    list.A[i].price = apalah[i].price;
+                    strCopy(list.A[i].name, stokItem[i].name);
+                    list.A[i].price = stokItem[i].price;
                     list.Neff++;
                 }
             } else if (manual_strcmp(command, "HELP") == 0) {
                 helpinwelcome();
             } else if (manual_strcmp(command, "QUIT") == 0) {
                 printf("\nExiting program...\n");
+                delay(3);
                 running = 0;
             } else {
                 printf("\nInvalid command. Please try again.\n");
@@ -158,9 +162,11 @@ int main() {
                     printf("Apakah anda ingin menyimpan data sesi sekarang (Y/N)? ");
                     STARTWORD();
                     if(currentWord.TabWord[0] == 'N'){
+                        printf("\nExiting program...\n");
+                        delay(3);
                         running = 0;
                     } else if (currentWord.TabWord[0] == 'Y'){
-                        Barang itemData[barangCtr];
+                        Barang *itemData = malloc(barangCtr * sizeof(Barang));
                         int x = 0;
                         while(x < barangCtr){
                             strCopy(itemData[x].name, list.A[x].name);
@@ -174,10 +180,13 @@ int main() {
                         // WordToString(currentWord, fname.TabWord);
                         SaveInterpreter(command, &fname);
                         SAVE(fname, itemData, barangCtr, data, userCtr);
+                        free(itemData);
+                        delay(3);
                         running = 0;
                     }
                 } else {
                     printf("\nExiting program...\n");
+                    delay(3);
                     running = 0;
                 }
             } else if (manual_strcmp(command, "WORK") == 0) {
@@ -212,7 +221,7 @@ int main() {
             } else if (manual_strcmp(command, "STORE REMOVE") == 0){
                 STOREREMOVE(&StoreList, &list); saved = 0;
             } else if (isSave(command)){
-                Barang itemData[barangCtr];
+                Barang *itemData = malloc(barangCtr * sizeof(Barang));
                 int x = 0;
                 while(x < barangCtr){
                     strCopy(itemData[x].name, list.A[x].name);
@@ -222,6 +231,7 @@ int main() {
                 SaveInterpreter(command, &fname);
                 SAVE(fname, itemData, barangCtr, data, userCtr);
                 saved = 1;
+                free(itemData);
             } else {
                 printf("\nInvalid command. Please try again.\n");
             }

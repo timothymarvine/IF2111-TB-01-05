@@ -5,13 +5,12 @@
 
 #include "..\..\boolean.h"
 #include "..\mesinkarakter\mesinkarakter.h"
+#include "..\kustom\datatype.h"
 
 #define NMax 50
 #define BLANK ' '
 #define NEWLINE '\n'
 #define MAX_LEN 100
-
-typedef char Produk[50];
 
 typedef struct
 {
@@ -108,7 +107,7 @@ boolean isWordEqual(const char *stringInput, char sample[MAX_LEN]);
 
 boolean strCmpr(char *a, char *b);
 
-void strCopy(Produk a, Produk b);
+void strCopy(Produk dest, Produk src);
 
 boolean isSave(const char *command);
 
