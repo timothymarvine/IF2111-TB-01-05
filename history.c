@@ -1,88 +1,72 @@
 #include <stdio.h>
-#include "stack.h"
+#include "stacklinked.h"
 #include "mesinkata.h"
 #include "mesinkarakter.h"
 
 int CountElements(Stack *S) {
-    int count = 0;
-    Stack tempStack;
-    CreateEmptyStack(&tempStack);
-
-    infotypeStack temp;
-    while (!IsEmptyStack(*S)) {
-        Pop(S, &temp);
-        Push(&tempStack, temp);
-        count++;
-    }
-
-    // Restore the original stack
-    while (!IsEmptyStack(tempStack)) {
-        Pop(&tempStack, &temp);
-        Push(S, temp);
-    }
-
-    return count;
+    return length(*S);
 }
 
 void ShowHistory(Stack *S, int N) {
-    if (IsEmptyStack(*S)) {
+    if (isEmpty(*S)) {
         printf("Kamu belum membeli barang apapun!\n");
         return;
     }
 
     int totalElements = CountElements(S);
 
-    // Adjust N if it exceeds the total number of elements
     if (N > totalElements) {
         N = totalElements;
     }
 
     Stack tempStack;
-    CreateEmptyStack(&tempStack);
+    CreateStack(&tempStack);
 
-    // Copy stack content to tempStack
-    infotypeStack temp;
-    while (!IsEmptyStack(*S)) {
-        Pop(S, &temp);
-        Push(&tempStack, temp);
+    Purchase temp;
+    while (!isEmpty(*S)) {
+        pop(S, &temp);
+        push(&tempStack, temp);
     }
 
-    // Display history
     int count = 0;
-    while (!IsEmptyStack(tempStack) && count < N) {
-        Pop(&tempStack, &temp);
-        printf("%d. %s %d\n", count + 1, temp.itemName, (int)temp.price);
-        Push(S, temp); // Push back to the original stack
+    while (!isEmpty(tempStack) && count < N) {
+        pop(&tempStack, &temp);
+        if (temp.price == (int)temp.price) {
+            printf("%d. %s %d\n", count + 1, temp.itemName, (int)temp.price);
+        } else {
+            printf("%d. %s %.2f\n", count + 1, temp.itemName, temp.price);
+        }
+        push(S, temp);
         count++;
     }
 
-    // Restore remaining elements
-    while (!IsEmptyStack(tempStack)) {
-        Pop(&tempStack, &temp);
-        Push(S, temp);
+    while (!isEmpty(tempStack)) {
+        pop(&tempStack, &temp);
+        push(S, temp);
     }
 
     printf("\n// Command mati; Kembali ke main menu\n");
 }
 
-void AddPurchase(Stack *S, const char *itemName, int price) {
-    if (IsFullStack(*S)) {
-        printf("History penuh! Tidak bisa menambahkan pembelian baru.\n");
-        return;
-    }
 
-    infotypeStack newPurchase;
-    snprintf(newPurchase.itemName, sizeof(newPurchase.itemName), "%s", itemName);
+void AddPurchase(Stack *S, const char *itemName, float price) {
+    Purchase newPurchase;
+
+    int i;
+    for (i = 0; itemName[i] != '\0' && i < 49; i++) {
+        newPurchase.itemName[i] = itemName[i];
+    }
+    newPurchase.itemName[i] = '\0';
+
     newPurchase.price = price;
-    newPurchase.quantity = 1; // Example: default quantity
-    Push(S, newPurchase);
+    newPurchase.quantity = 1;
+    push(S, newPurchase);
 }
 
 int main() {
     Stack S;
-    CreateEmptyStack(&S);
+    CreateStack(&S);
 
-    // Contoh pembelian
     AddPurchase(&S, "AK47", 40);
     AddPurchase(&S, "AK47", 100);
     AddPurchase(&S, "Lalabu", 35);
@@ -93,7 +77,7 @@ int main() {
     int pilihanhistory;
     char convert[50];
 
-    printf("\n>> HISTORY (Masukkan jumlah history yang ingin ditampilkan): ");
+    printf("\n>> HISTORY ");
     STARTWORD();
     WordToString(currentWord, convert);
     pilihanhistory = stringToInteger(convert);
@@ -101,6 +85,7 @@ int main() {
         printf("Input tidak valid. Harap masukkan angka positif.\n");
         return 0;
     }
+
     ShowHistory(&S, pilihanhistory);
 
     return 0;
