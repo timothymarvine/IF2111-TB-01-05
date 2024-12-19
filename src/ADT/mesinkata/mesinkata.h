@@ -117,4 +117,6 @@ int WordToInt(Word w);
 
 void WordToCharArray(Word Kata, char *arr);
 
+int manual_strcmp(char *str1, char *str2);
+
 #endif

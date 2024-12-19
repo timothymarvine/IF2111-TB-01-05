@@ -2,7 +2,7 @@
 #define MAP_H
 #include "..\mesinkata\mesinkata.h"
 #include "..\..\boolean.h"
-#define Nil 0
+#define Nol 0
 #define MaxEl 100
 #define Undefined 0
 
@@ -25,12 +25,12 @@ typedef struct {
 void CreateEmptyM(Map *M);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
-/* Ciri Map kosong : count bernilai Nil */
+/* Ciri Map kosong : count bernilai Nol */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
 boolean IsEmptyM(Map M);
 /* Mengirim true jika Map M kosong*/
-/* Ciri Map kosong : count bernilai Nil */
+/* Ciri Map kosong : count bernilai Nol */
 
 boolean IsFullM(Map M);
 /* Mengirim true jika Map M penuh */

@@ -3,16 +3,16 @@
 
 #include "datatype.h"
 #include "..\map\map.h"
-// #include "..\stack\stack.h"
-
+#include "..\stack\stack.h"
+#include "..\linkedlist\linkedlist.h"
 
 typedef struct {
     char name[MAX_STRLEN];
     char password[MAX_STRLEN];
     int money;
-    Map keranjang;
-    // Stack riwayat_pembelian;
-    // LinkedList wishlist;
+    Map cart;
+    Stack history;
+    LinkedList wishlist;
 } UserCheckOut;
 
 #endif

@@ -2,7 +2,7 @@
 #include "..\mesinkata\mesinkata.h"
 
 void CreateEmptyM(Map *m){
-    m->Count = Nil;
+    m->Count = Nol;
 }
 
 boolean IsEmptyM(Map m){

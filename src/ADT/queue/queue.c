@@ -1,78 +1,93 @@
 #include "queue.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+void Alokasi(addr *p, Produk x){
+    *p = (addr) malloc(sizeof(Produk));
+    if(*p != Nil){
+        strCopy(Info(*p), x);
+        Next(*p) = Nil;
+    }
+}
+
+void Dealokasi(addr p){
+    free(p);
+}
 
 boolean IsEmptyQ(Queue q){
-	return (IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF);
+    return Head(q) == Nil && Tail(q) == Nil;
 }
 
-boolean IsFullQ(Queue q){
-	return IDX_HEAD(q) == (IDX_TAIL(q) + 1) % IDX_MAX;
-}
-
-int LengthQ(Queue q){
-	if (IsEmptyQ(q)) {
-        return 0;
+int NbElmt(Queue q){
+    int ctr = 0;
+    addr p = Head(q);
+    while(p != Tail(q)){
+        ctr++;
+        p = Next(p);
     }
-    if (q.idxTail >= q.idxHead) {
-        return q.idxTail - q.idxHead + 1;
+
+    return ctr + 1;
+}
+
+void CreateEmptyQ(Queue *q){
+    Head(*q) = Nil;
+    Tail(*q) = Nil;
+}
+
+void Enqueue(Queue *q, Produk x){
+    addr p;
+    Alokasi(&p, x);
+    if(p != Nil){
+        if(IsEmptyQ(*q)){
+            Head(*q) = p;
+            Tail(*q) = p;
+        } else {
+            Next(Tail(*q)) = p;
+            Tail(*q) = p;
+        }
+    }
+}
+
+void Dequeue(Queue *q){
+    if(IsEmptyQ(*q)){
+        return;
+    }
+    addr p = Head(*q);
+    if(Head(*q) == Tail(*q)){
+        Head(*q) = Nil;
+        Tail(*q) = Nil;
     } else {
-        return (IDX_MAX - q.idxHead + q.idxTail + 2);
+        Head(*q) = Next(Head(*q));
     }
+    Dealokasi(p);
 }
 
-void CreateQueue(Queue *q){
-	IDX_HEAD(*q) = IDX_UNDEF;
-	IDX_TAIL(*q) = IDX_UNDEF;
-}
-
-void enqueue(Queue *q, Produk x){
-	if(IsEmptyQ(*q)){
-		IDX_HEAD(*q) = 0;
-	} else if(IsFullQ(*q)){
-		printf("Antrian sudah penuh! Silakan coba lagi nanti!");
-		return;
-	}
-
-	IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % (IDX_MAX + 1);
-	strCopy(TAIL(*q), x);
-}
-
-void dequeue(Queue *q){
-	if(IDX_HEAD(*q) == IDX_TAIL(*q)){
-		IDX_HEAD(*q) = IDX_UNDEF;
-		IDX_TAIL(*q) = IDX_UNDEF;
-	} else {
-		IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % (IDX_MAX + 1); 
-	}
-
-    // return q;
+boolean isMemberQ(Queue q, Produk x){
+    if(IsEmptyQ(q)){
+        return false;
+    }
+    addr p = Head(q);
+    while(p != Nil){
+        if(strCmpr(x, Info(p))){
+            return true;
+        }
+        p = Next(p);
+    }
+    return false;
 }
 
 void DisplayQueue(Queue q){
-	if (IsEmptyQ(q)) {
-        printf("[]\n");
-    } else {
-        int i = q.idxHead;
-        printf("[");
-        while (1) {
-            printf("%s", q.Tab[i]);
-            if (i == q.idxTail) break;
-            printf(", ");
-            i = (i + 1) % (IDX_MAX + 1);
-        }
-        printf("]\n");
+    if(IsEmptyQ(q)){
+        printf("Antrian kosong!");
+        return;
     }
-}
-
-boolean IsMemberQ(Queue q, Produk x){
-	int i = IDX_HEAD(q);
-	while(i != IDX_TAIL(q)){
-		if(strCmpr(x, q.Tab[i])){
-			return true;
-		}
-
-		i = (i + 1) % (IDX_MAX + 1);
-	}
-
-	return strCmpr(x, q.Tab[i]);
+    addr p = Head(q);
+    while(p != Nil){
+        printf("%s", Info(p));
+        if(Next(p) != Nil){
+            printf(", ");
+        }
+        p = Next(p);
+    }
+    printf("\n");
 }
