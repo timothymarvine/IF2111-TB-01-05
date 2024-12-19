@@ -203,9 +203,13 @@ int main() {
             case 2: {
                 int i, j;
                 printf("Masukkan indeks pertama: ");
-                scanf("%d", &i);
+                STARTWORD();
+                WordToString(currentWord, convert);
+                i = stringToInteger(convert);
                 printf("Masukkan indeks kedua: ");
-                scanf("%d", &j);
+                STARTWORD();
+                WordToString(currentWord, convert);
+                j = stringToInteger(convert);
                 wishlistSwap(&Wishlist, i, j);
                 break;
             }
@@ -213,7 +217,9 @@ int main() {
             case 3: {
                 int index;
                 printf("Masukkan indeks barang yang ingin dihapus: ");
-                scanf("%d", &index);
+                STARTWORD();
+                WordToString(currentWord, convert);
+                index = stringToInteger(convert);
                 wishlistRemoveIndex(&Wishlist, index);
                 break;
             }
