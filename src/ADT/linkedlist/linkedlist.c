@@ -15,9 +15,11 @@ boolean IsListEmpty(LinkedList L) {
 int ListLength(LinkedList L){
     int ctr = 0;
     Address p = FirstL(L);
-    while(p != Nil){
-        ctr++;
-        p = NextL(p);
+    if(p != Nil){
+        while(p != Nil){
+            ctr++;
+            p = NextL(p);
+        }
     }
 
     return ctr;
@@ -98,11 +100,30 @@ void DeleteLastList(LinkedList *L, Address *P) {
     PrevL(*P) = NIL;
 }
 
+void DeleteMemberList(LinkedList *L, Produk x){
+    Address a;
+    if(ListLength(*L) == 1){
+        DeleteFirstList(L, &a);
+    }
+    Address q = FirstL(*L);
+    Address p = NextL(q);
+    while(p != Nil){
+        if(strCmpr(x, InfoL(p))){
+            NextL(q) = NextL(p);
+            PrevL(NextL(p)) = q;
+            Deallocate(p);
+            return;
+        }
+        q = p;
+        p = NextL(p);
+    }
+}
+
 // Mencari elemen di dalam list
 Address Search(LinkedList L, ElementType X) {
     Address P = FirstL(L);
     while (P != NIL) {
-        if (strcmp(InfoL(P), X) == 0) {
+        if (strCmpr(InfoL(P), X) == 0) {
             return P;
         }
         P = NextL(P);

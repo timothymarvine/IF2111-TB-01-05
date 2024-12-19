@@ -9,7 +9,6 @@
 #define NIL NULL
 
 typedef char* ElementType;
-typedef struct Node *Address;
 typedef struct Node {
     ElementType info;
     Address next;
@@ -40,6 +39,7 @@ void InsertFirstList(LinkedList *L, Address P);
 void InsertLastList(LinkedList *L, Address P);
 void DeleteFirstList(LinkedList *L, Address *P);
 void DeleteLastList(LinkedList *L, Address *P);
+void DeleteMemberList(LinkedList *L, Produk x);
 
 Address Search(LinkedList L, ElementType X);
 void PrintListForward(LinkedList L);

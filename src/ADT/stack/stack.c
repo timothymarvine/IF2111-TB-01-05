@@ -5,12 +5,12 @@
 
 
 /* Prototype manajemen memori */
-Address newNode(Purchase x)
+Addr newNode(Purchase x)
 /* Mengembalikan alamat sebuah Node hasil alokasi dengan info = x, 
    atau 
    NULL jika alokasi gagal */   
 {
-    Address p = (Address) malloc (sizeof(Node));
+    Addr p = (Addr) malloc (sizeof(node));
     if(p != Nil){
         strCopy(INFO(p).itemName, x.itemName);
         INFO(p).total = x.total;
@@ -33,7 +33,7 @@ int length(Stack s)
 /* Mengirimkan banyaknya elemen stack. Mengirimkan 0 jika Stack s kosong */
 {
     int count = 0;
-    Address p;
+    Addr p;
 
     if(!isEmpty(s)) {
         p = ADDR_TOP(s);
@@ -62,7 +62,7 @@ void DisplayStack(Stack s, int x)
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika Stack kosong : menulis [] */
 {
-    Address p;
+    Addr p;
 	p = ADDR_TOP(s);
     int i = 0;
 	printf("Riwayat pembelian barang:\n");
@@ -79,7 +79,7 @@ void push(Stack *s, Purchase x)
 /*      jika tidak, s tetap */
 /* Pada dasarnya adalah operasi insertFirst pada list linier */
 {
-    Address p = newNode(x);
+    Addr p = newNode(x);
     if (p != NULL) {
         NEXT(p) = ADDR_TOP(*s);
         ADDR_TOP(*s) = p;
@@ -93,9 +93,8 @@ void pop(Stack *s, Purchase *x)
 /*      elemen Top yang lama didealokasi */
 /* Pada dasarnya adalah operasi deleteFirst pada list linier */
 {
-    Address p;
-    p = ADDR_TOP(*s);
-    *x = TOP(*s);
+    Addr p = ADDR_TOP(*s);
+    strCopy(x->itemName, TOP(*s).itemName);
     ADDR_TOP(*s) = NEXT(ADDR_TOP(*s));
     free(p);
 }

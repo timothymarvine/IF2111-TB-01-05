@@ -43,6 +43,10 @@ void STARTWORD(){
 
 void STARTSENTENCE(){
     START();
+    currentWord.Length = 0;
+    for(int i = 0; i < NMax; i++){
+        currentWord.TabWord[i] = '\0';
+    }
     if (pita != NULL){
         IgnoreBlanks();
         if (currentChar==MARK || currentChar==NEWLINE){

@@ -20,6 +20,6 @@
 
 typedef int IdxType;
 typedef char Produk[50];
-typedef struct node* Address;
+typedef struct Node* Address;
 
 #endif

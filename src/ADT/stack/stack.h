@@ -16,15 +16,16 @@ typedef struct {
 } Purchase;
 
 /* Stack dengan representasi berkait dengan pointer */
-typedef struct node *Address;
+typedef struct node *Addr;
+typedef struct node *Addr;
 typedef struct node {
     Purchase info;
-    Address next; 
-} Node; 
+    Addr next; 
+} node; 
 
 /* Type stack dengan ciri Top: */
 typedef struct {
-    Address addrTop; /* alamat Top: elemen puncak */
+    Addr addrTop; /* alamat Top: elemen puncak */
 } Stack;
 
 
@@ -35,7 +36,7 @@ typedef struct {
 #define      TOP(s) (s).addrTop->info 
 
 /* Prototype manajemen memori */
-Address newNode(Purchase x);
+Addr newNode(Purchase x);
 /* Mengembalikan alamat sebuah Node hasil alokasi dengan info = x, 
    atau 
    NULL jika alokasi gagal */   
