@@ -64,15 +64,15 @@ void registerUser(UserCheckOut user[], const char *username, const char *passwor
 
 boolean findUser(UserCheckOut user[], const char *username, const char *password, int totalUser);
 
-void loginUser(UserCheckOut user[], char *username, const char *password, int *loggedIn, char activeUser[]);
+void loginUser(UserCheckOut user[], char *username, const char *password, int *loggedIn, int totalUser, char activeUser[]);
 
 void logoutUser(char username[], int *isLoggedIn);
 
-void LOAD(char dir[], UserCheckOut *data[], ArrayDin *barang, int *jumlahUser, int *loaded);
+void LOAD(char dir[], UserCheckOut data[], ArrayDin *barang, int *jumlahUser, int *loaded);
 
 void SAVE(char dir[], UserCheckOut data[], ArrayDin barang, int jumlahUser);
 
-void ConfigReader(UserCheckOut *sys[], int *userCtr, ArrayDin *list, int *loaded);
+void ConfigReader(UserCheckOut sys[], int *userCtr, ArrayDin *list, int *loaded);
 
 void Request(Queue *q, ArrayDin *list);
 

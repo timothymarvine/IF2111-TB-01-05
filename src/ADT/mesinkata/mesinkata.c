@@ -452,7 +452,7 @@ void itemReader(Word kata, char barang[], int *wordIdx){
 }
 
 void numReader(Word kata, int *res, int *wordIdx){
-    int i = wordIdx;
+    int i = *wordIdx; *res = 0;
     while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
         if(kata.TabWord[i] >= '0' || kata.TabWord[i] <= '9'){
             *res = *res * 10 + (kata.TabWord[i] - '0');
@@ -471,5 +471,5 @@ void dirReader(Word kata, char dir[], int *wordIdx){
         dir[j] = kata.TabWord[i]; i++; j++;
     }
     dir[j] = '\0';
-    *wordIdx = i;
+    *wordIdx = i + 1;
 }

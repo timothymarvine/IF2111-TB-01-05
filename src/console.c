@@ -157,12 +157,12 @@ boolean isUsernameTaken(UserCheckOut user[], const char *username, int totalUser
 }
 
 void registerUser(UserCheckOut user[], const char *username, const char *password, int *totalUser) {
-    if (isUsernameTaken(user, username, totalUser)) {
+    if (isUsernameTaken(user, username, *totalUser)) {
         printf("\nAkun dengan username %s gagal dibuat. Silakan lakukan REGISTER ulang.\n", username);
         return;
     }
 
-    if (totalUser < MAX_USERS) {
+    if (*totalUser < MAX_USERS) {
         for(int i = 0; i < MAX_LENGTH; i++){
             if(username[i] == '\0' || username[i] == '\n') break;
             user[*totalUser].name[i] = username[i];
@@ -212,7 +212,7 @@ void logoutUser(char activeUser[], int *isLoggedIn) {
     *isLoggedIn = 0;
 }
 
-void LOAD(char dir[], UserCheckOut *data[], ArrayDin *barang, int *jumlahUser, int *loaded) {
+void LOAD(char dir[], UserCheckOut data[], ArrayDin *barang, int *jumlahUser, int *loaded) {
     int i, N, M;
     char filename[100] = "src/save/";
 
@@ -244,13 +244,13 @@ void LOAD(char dir[], UserCheckOut *data[], ArrayDin *barang, int *jumlahUser, i
 
     for (i = 0; i < M; i++) {
         ADVWORD();
-        data[i]->money = WordToInt(currentWord);
+        data[i].money = WordToInt(currentWord);
 
         ADVWORD();
-        WordToCharArray(currentWord, data[i]->name);
+        WordToCharArray(currentWord, data[i].name);
 
         ADVWORD();
-        WordToCharArray(currentWord, data[i]->password);
+        WordToCharArray(currentWord, data[i].password);
 
         ADVWORD();
         int historyCnt = WordToInt(currentWord);
@@ -262,7 +262,7 @@ void LOAD(char dir[], UserCheckOut *data[], ArrayDin *barang, int *jumlahUser, i
             ADVSENTENCE();
             strCopy(x.itemName, currentWord.TabWord);
 
-            push(&data[i]->history, x);
+            push(&data[i].history, x);
         }
  
         ADVWORD();
@@ -270,12 +270,15 @@ void LOAD(char dir[], UserCheckOut *data[], ArrayDin *barang, int *jumlahUser, i
         for(int j = 0; j < wishlistCnt; j++){
             ADVSENTENCE();
             Address p = Allocate(currentWord.TabWord);
-            InsertLastList(&data[i]->wishlist, p);
+            if(p != NULL){
+                InsertLastList(&data[i].wishlist, p);
+            }
         }
     }
 
     if(strCmpr(dir, "config.txt")){
         printf("File konfigurasi aplikasi berhasil dibaca. PURRMART berhasil dijalankan.");
+        *loaded = 1;
     } else {
         printf("Save file berhasil dibaca. PURRMART berhasil dijalankan.\n");
     }
@@ -329,7 +332,7 @@ void SAVE(char dir[], UserCheckOut data[], ArrayDin barang, int jumlahUser) {
     printf("Save file berhasil disimpan.\n");
 }
 
-void ConfigReader(UserCheckOut *sys[], int *userCtr, ArrayDin *list, int *loaded){
+void ConfigReader(UserCheckOut sys[], int *userCtr, ArrayDin *list, int *loaded){
     LOAD("config.txt", sys, list, userCtr, loaded);
 }
 
