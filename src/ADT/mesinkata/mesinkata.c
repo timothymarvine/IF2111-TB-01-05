@@ -355,3 +355,121 @@ int manual_strcmp(char *str1, char *str2) {
     }
     return *str1 - *str2;
 }
+
+int isCart(Word kata){
+    int a = 0; char cart[4];
+    for(int b = 0; b < 4; b++){
+        cart[b] = kata.TabWord[b]; 
+    }
+    if(!strCmpr(cart, "CART")){
+        return 0;
+    }
+
+    int i = 5, j = 0; char next[10];
+    for(i; i != ' ' && i != '\0' && i != '\n'; i++){
+        next[j] = kata.TabWord[i];
+        j++;
+    }
+    if(strCmpr(next, "ADD")){
+        return 1;
+    } else if(strCmpr(next, "REMOVE")){
+        return 2;
+    } else if(strCmpr(next, "SHOW")){
+        return 3;
+    } else if(strCmpr(next, "PAY")){
+        return 4;
+    } else {
+        return 0;
+    }
+}
+
+int isHistory(Word kata){
+    int i = 0; char history[7];
+    for(i; i < 7; i++){
+        history[i] = kata.TabWord[i];
+    }
+    if(!strCmpr(history, "HISTORY")){
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+int isWl(Word kata){
+    int i = 0; char wl[8];
+    for(i; i < 8; i++){
+        wl[i] = kata.TabWord[i];
+    }
+    if(!strCmpr(wl, "WISHLIST")){
+        return 0;
+    }
+
+    i = 9; char next[10]; int j = 0;
+    for(i; i != ' ' && i != '\n' && i != MARK; i++){
+        next[j] = kata.TabWord[i];
+        j++;
+    }
+    if(strCmpr(next, "ADD")){
+        return 1;
+    } else if(strCmpr(next, "SWAP")){
+        return 2;
+    } else if(strCmpr(next, "REMOVE")){
+        return 3;
+    } else if(strCmpr(next, "CLEAR")){
+        return 4;
+    } else if(strCmpr(next, "SHOW")){
+        return 5;
+    } else {
+        return 0;
+    }
+}
+
+void oneWordCmd(Word kata, char perintah[], int *wordIdx){
+    int i = *wordIdx;
+    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+        perintah[i] = kata.TabWord[i]; i++;
+    }
+    perintah[i] = '\0';
+    *wordIdx = i + 1;
+}
+
+void twoWordCmd(Word kata, char perintah[], int *wordIdx){
+    int i = *wordIdx, j = 0;
+    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+        perintah[j] = kata.TabWord[i]; i++; j++;
+    }
+    perintah[j] = '\0';
+    *wordIdx = i + 1;
+}
+
+void itemReader(Word kata, char barang[], int *wordIdx){
+    int i = *wordIdx, j = 0;
+    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+        barang[j] = kata.TabWord[i]; i++; j++;
+    }
+    barang[j] = '\0';
+    *wordIdx = i + 1;
+}
+
+void numReader(Word kata, int *res, int *wordIdx){
+    int i = wordIdx;
+    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+        if(kata.TabWord[i] >= '0' || kata.TabWord[i] <= '9'){
+            *res = *res * 10 + (kata.TabWord[i] - '0');
+            i++;
+        } else {
+            printf("Masukkan input angka yang benar.");
+            return;
+        }
+    }
+    *wordIdx = i + 1;
+}
+
+void dirReader(Word kata, char dir[], int *wordIdx){
+    int i = *wordIdx, j = 0;
+    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+        dir[j] = kata.TabWord[i]; i++; j++;
+    }
+    dir[j] = '\0';
+    *wordIdx = i;
+}
