@@ -48,9 +48,9 @@ void STORELIST(ArrayDin StoreList);
 void STOREREMOVE(ArrayDin *StoreList);
 /* Menghapus sebuah barang pada store */
 
-void CartAdd(Map *c, int qty, ArrayDin list, Word newItem);
+void CartAdd(Map *c, int qty, ArrayDin list, char newItem[]);
 
-void CartRemove(Map *c, int qty, Word item);
+void CartRemove(Map *c, int qty, char item[]);
 
 void CARTPAY(Map *cart, ArrayDin list, Stack *history, int *money);
 
@@ -66,7 +66,7 @@ boolean findUser(UserCheckOut user[], const char *username, const char *password
 
 void loginUser(UserCheckOut user[], char *username, const char *password, int *loggedIn, char activeUser[]);
 
-void logoutUser(int *isLoggedIn);
+void logoutUser(char username[], int *isLoggedIn);
 
 void LOAD(char dir[], UserCheckOut *data[], ArrayDin *barang, int *jumlahUser, int *loaded);
 
@@ -132,6 +132,6 @@ void wishlistClear(LinkedList *L);
 
 void wishlistShow(LinkedList L);
 
-void showProfile(System *sys, UserCheckOut user[], int userCount, int uang_asal);
+void showProfile(char user[], int uang_asal);
 
 #endif

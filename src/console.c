@@ -42,22 +42,22 @@ void STOREREMOVE(ArrayDin *StoreList){
     }
 } 
 
-void CartAdd(Map *c, int qty, ArrayDin list, Word newItem){
-    if(SearchArrayDin(list, newItem.TabWord)){
-        if(!IsMemberM(*c, newItem.TabWord)){
-            strCopy(c->Elements[c->Count].Key, newItem.TabWord);
+void CartAdd(Map *c, int qty, ArrayDin list, char newItem[]){
+    if(SearchArrayDin(list, newItem)){
+        if(!IsMemberM(*c, newItem)){
+            strCopy(c->Elements[c->Count].Key, newItem);
             c->Elements[c->Count].Value = 0;
             c->Count++;
         }
-        ChangeVal(c, newItem.TabWord, qty);
+        ChangeVal(c, newItem, qty);
     } else {
         printf("Barang tidak ada di toko!");
     }
 }
 
-void CartRemove(Map *c, int qty, Word item){
+void CartRemove(Map *c, int qty, char item[]){
     Produk i;
-    strCopy(i, item.TabWord);
+    strCopy(i, item);
     if(IsMemberM(*c, i)){
         ChangeVal(c, i, qty);
     } else {
@@ -918,22 +918,16 @@ void wishlistShow(LinkedList L) {
     }
 }
 
-void showProfile(System *sys, UserCheckOut user[], int userCount, int uang_asal){
-    if (sys->activeUser[0] == '\0')
+void showProfile(char username[], int uang){
+    if (username[0] == '\0')
     {
         printf("silakan LOGIN terlebih dahulu untuk melihat profil. \n");
         return;
     }
     
-    for (int i = 0; i < userCount; i++)
-    {
-        if (isWordEqual(sys->activeUser, user[i].name))
-        {
-            printf("== PROFILE ==\n");
-            printf("Nama  : %s", user[i].name);
-            printf("\nSaldo : %d\n\n", uang_asal);
-            return;
-        }
-    }
+    printf("\n== PROFILE ==\n");
+    printf("Nama  : %s", username);
+    printf("\nSaldo : %d\n\n", uang);
+    return;
     
 }
