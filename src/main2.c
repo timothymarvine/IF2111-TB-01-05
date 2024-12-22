@@ -8,7 +8,7 @@ int main(){
     int angka, totalUser, uang, result = 0, loaded = 0, welcoming = 1, loggingIn = 0, loggedIn = 0, centralIndex;
     Queue q; ArrayDin item = MakeArrayDin(); UserCheckOut central[10];
     CreateEmptyQ(&q);
-    System auth; initializeSystem(&auth);
+    System auth; initializeSystem(&auth); activeUser[0] = '\0';
 
     while(1){
         if(welcoming == 1){
@@ -71,7 +71,7 @@ int main(){
                     uang = central[i].money;
                     loggingIn = 0;
                 }
-            } else if(perintah, "REGISTER"){
+            } else if(strCmpr(perintah, "REGISTER")){
                 printf("Masukkan username: ");
                 STARTWORD();
                 char  username[50];
