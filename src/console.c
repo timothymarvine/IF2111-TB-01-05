@@ -89,7 +89,7 @@ void CARTPAY(Map *cart, ArrayDin list, Stack *history, int *money){
 
   if (WordCompareString(currentWord, "Ya")){
     if (userMoney >= totalCost) {
-      userMoney -= totalCost;
+      *money -= totalCost;
       Purchase purchase;
       for (int i = 0; i < cart->Count; i++) {
         int j = 0;
