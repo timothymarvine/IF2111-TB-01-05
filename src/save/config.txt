@@ -1,4 +1,20 @@
+3
+10 AK47
+20 Lalabu
+20 Ayam Goreng Crisbar
+2
+100 user1 alstrukdatkeren
+6
+40 AK47
+100 AK47
+35 Lalabu
+10 AK47
+500 Meong
+20 Ayam Goreng Crisbar
+2
+Ayam Goreng Crisbar
+AK47
+25 user2 kerenbangetkak
+0
 1
-50 Fiesta Chicken Nugget
-1
-0 user user
+Meong
