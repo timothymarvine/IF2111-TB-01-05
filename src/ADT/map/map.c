@@ -76,7 +76,7 @@ void ChangeVal(Map *m, Produk k, valuetype v){
                 } else if(m->Elements[i].Value > jumlah){
                     printf("Berhasil menambahkan %d %s ke keranjang belanja!\n", v, k);
                 }  else {
-                    printf("Berhasil mengurangi %d %s dari keranjang belanja!\n", v, k);
+                    printf("Berhasil mengurangi %d %s dari keranjang belanja!\n", v - (v * 2), k);
                 }
             } else {
                 printf("Tidak berhasil mengurangi, hanya terdapat %d %s pada keranjang!\n", m->Elements[i].Value, m->Elements[i].Key);

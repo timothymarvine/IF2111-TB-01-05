@@ -130,7 +130,7 @@ int main(){
                     itemReader(currentWord, barang, &wordIdx);
                     numReader(currentWord, &result, &wordIdx);
 
-                    CartRemove(&central[centralIndex].cart, result, barang);
+                    CartRemove(&central[centralIndex].cart, -result, barang);
                 } else if(strCmpr(gandengan, "SHOW")){
                     CARTSHOW(central[centralIndex].cart, item);
                 } else  if(strCmpr(gandengan, "PAY")){
