@@ -170,6 +170,7 @@ int main(){
                 helpinmain();
             } else if(strCmpr(perintah, "LOGOUT")){
                 logoutUser(activeUser, &loggedIn);
+                loggingIn = 1;
             } else if(strCmpr(perintah, "SAVE")){
                 dirReader(currentWord, dir, &wordIdx);
 

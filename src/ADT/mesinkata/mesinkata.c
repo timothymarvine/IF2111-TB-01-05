@@ -88,6 +88,10 @@ void STARTENTER(){
 
 void ADVWORD(){
     IgnoreBlanks();
+    currentWord.Length = 0;
+    for(int i = 0; i < NMax; i++){
+        currentWord.TabWord[i] = '\0';
+    }
     if (currentChar==MARK){
         EndWord=true;
     } else{
@@ -102,6 +106,10 @@ void ADVWORD(){
 
 void ADVSENTENCE(){
     IgnoreBlanks();
+    currentWord.Length = 0;
+    for(int i = 0; i < NMax; i++){
+        currentWord.TabWord[i] = '\0';
+    }
     if (currentChar==MARK){
         EndWord=true;
     } else{
