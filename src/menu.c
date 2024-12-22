@@ -2,19 +2,6 @@
 #include <stdlib.h>
 #include "menu.h"
 
-/* buat bandingin string*/
-int manual_strcmp(char *str1, char *str2) {
-    while (*str1 && *str2) {
-        if (*str1 != *str2) {
-            return *str1 - *str2;
-        }
-        str1++;
-        str2++;
-    }
-    return *str1 - *str2;
-}
-
-
 void WelcomeMenu() {
     printf("============ Selamat datang di =============\n");
     printf("================= PURRMART =================\n");
@@ -24,7 +11,7 @@ void WelcomeMenu() {
     printf("|                 3. HELP                  |\n");
     printf("|                 4. QUIT                  |\n");
     printf("===========================================\n");
-    printf("           Masukkan pilihanmu: ");
+    printf("Masukkan pilihanmu: ");
 }
 
 void LoginMenu() {
@@ -35,7 +22,7 @@ void LoginMenu() {
     printf("|                 3. HELP                  |\n");
     printf("|                 4. QUIT                  |\n");
     printf("===========================================\n");
-    printf("           Masukkan pilihanmu: ");
+    printf("Masukkan pilihanmu: ");
 }
 
 void helpinwelcome() {
@@ -84,5 +71,5 @@ void MainMenu() {
     printf("|                           9. QUIT                           |\n");
     printf("|  10. HELP -> Untuk melihat masing-masing kegunaan command   |\n");
     printf("==============================================================\n");
-    printf("                      Masukkan pilihanmu: ");
+    printf("Masukkan pilihanmu: ");
 }

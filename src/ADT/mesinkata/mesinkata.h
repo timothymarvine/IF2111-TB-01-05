@@ -125,13 +125,13 @@ int isHistory(Word kata);
 
 int isWl(Word kata);
 
-void oneWordCmd(Word kata, char perintah[], int *wordIdx);
+void oneWordCmd(Word kata, char* perintah, int *wordIdx);
 
-void twoWordCmd(Word kata, char perintah[], int *wordIdx);
+void twoWordCmd(Word kata, char* perintah, int *wordIdx);
 
-void dirReader(Word kata, char dir[], int *wordIdx);
+void dirReader(Word kata, char* dir, int *wordIdx);
 
-void itemReader(Word kata, char barang[], int *wordIdx);
+void itemReader(Word kata, char* barang, int *wordIdx);
 
 void numReader(Word kata, int *res, int *wordIdx);
 

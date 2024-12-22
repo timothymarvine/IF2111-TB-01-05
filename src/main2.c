@@ -14,6 +14,7 @@ int main(){
         if(welcoming == 1){
             WelcomeMenu();
             STARTSENTENCE();
+            currentWord.TabWord[currentWord.Length] = '\0';
             int wordIdx = 0;
             oneWordCmd(currentWord, perintah, &wordIdx);
             
@@ -36,11 +37,14 @@ int main(){
                 printf("Exiting program...");
                 delay(2);
                 break;
+            } else {
+                printf("Command tidak dikenal. Masukkan perintah yang benar.");
             }
         } else if(loggingIn == 1){
             int wordIdx = 0;
             LoginMenu();
             STARTSENTENCE();
+            currentWord.TabWord[currentWord.Length] = '\0';
             oneWordCmd(currentWord, perintah, &wordIdx);
 
             if(strCmpr(perintah, "LOGIN")){
@@ -81,11 +85,18 @@ int main(){
                 registerUser(central, username, password, &totalUser);
             } else if(strCmpr(perintah, "HELP")){
                 helpinlogin();
+            } else if(strCmpr(perintah, "QUIT")){
+                printf("Exiting program...");
+                delay(2);
+                break;
+            } else {
+                printf("Command tidak dikenal. Masukkan perintah yang benar.");
             }
         } else if(loggedIn == 1){
             int wordIdx = 0;
             MainMenu();
             STARTSENTENCE();
+            currentWord.TabWord[currentWord.Length] = '\0';
             oneWordCmd(currentWord, perintah, &wordIdx);
 
             if(strCmpr(perintah, "STORE")){
@@ -169,6 +180,8 @@ int main(){
                 delay(3);
 
                 break;
+            } else {
+                printf("Command tidak dikenal. Masukkan perintah yang benar.");
             }
         }
     }

@@ -6,8 +6,6 @@ typedef struct {
     int length;
 } Set;
 
-int manual_strcmp(char *str1, char *str2);
-
 void WelcomeMenu();
 
 void LoginMenu();

@@ -424,27 +424,27 @@ int isWl(Word kata){
     }
 }
 
-void oneWordCmd(Word kata, char perintah[], int *wordIdx){
+void oneWordCmd(Word kata, char* perintah, int *wordIdx){
     int i = *wordIdx;
-    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+    while(kata.TabWord[i] != BLANK && kata.TabWord[i] != NEWLINE && kata.TabWord[i] != '\0'){
         perintah[i] = kata.TabWord[i]; i++;
     }
     perintah[i] = '\0';
     *wordIdx = i + 1;
 }
 
-void twoWordCmd(Word kata, char perintah[], int *wordIdx){
+void twoWordCmd(Word kata, char* perintah, int *wordIdx){
     int i = *wordIdx, j = 0;
-    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+    while(kata.TabWord[i] != BLANK && kata.TabWord[i] != NEWLINE && kata.TabWord[i] != '\0'){
         perintah[j] = kata.TabWord[i]; i++; j++;
     }
     perintah[j] = '\0';
     *wordIdx = i + 1;
 }
 
-void itemReader(Word kata, char barang[], int *wordIdx){
+void itemReader(Word kata, char* barang, int *wordIdx){
     int i = *wordIdx, j = 0;
-    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+    while(kata.TabWord[i] != BLANK && kata.TabWord[i] != NEWLINE && kata.TabWord[i] != '\0'){
         barang[j] = kata.TabWord[i]; i++; j++;
     }
     barang[j] = '\0';
@@ -453,7 +453,7 @@ void itemReader(Word kata, char barang[], int *wordIdx){
 
 void numReader(Word kata, int *res, int *wordIdx){
     int i = *wordIdx; *res = 0;
-    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+    while(kata.TabWord[i] != BLANK && kata.TabWord[i] != NEWLINE && kata.TabWord[i] != '\0'){
         if(kata.TabWord[i] >= '0' || kata.TabWord[i] <= '9'){
             *res = *res * 10 + (kata.TabWord[i] - '0');
             i++;
@@ -465,9 +465,9 @@ void numReader(Word kata, int *res, int *wordIdx){
     *wordIdx = i + 1;
 }
 
-void dirReader(Word kata, char dir[], int *wordIdx){
+void dirReader(Word kata, char* dir, int *wordIdx){
     int i = *wordIdx, j = 0;
-    while(kata.TabWord[i] != ' ' && kata.TabWord[i] != '\n'){
+    while(kata.TabWord[i] != BLANK && kata.TabWord[i] != NEWLINE && kata.TabWord[i] != '\0'){
         dir[j] = kata.TabWord[i]; i++; j++;
     }
     dir[j] = '\0';
