@@ -3,6 +3,7 @@
 
 // Struktur data
 #include "ADT\array\arraydin.h"
+#include "ADT\kustom\mainadt.h"
 
 typedef struct {
     char namaUser[50];

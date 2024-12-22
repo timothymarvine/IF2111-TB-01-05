@@ -1,10 +1,8 @@
 #ifndef RLL_H
 #define RLL_H
 
-#define MAX_USERS 100
-#define MAX_LENGTH 100
-
 #include "load.h"
+#include "ADT\definitions.h"
 
 typedef struct {
     char username[MAX_LENGTH];

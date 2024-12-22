@@ -61,5 +61,4 @@ void work(int *uang_asal){
     *uang_asal += pendapatan;
     printf("Pekerjaan selesai, +%d rupiah telah ditambahkan ke akun Anda.\n", pendapatan);
     printf("Uang anda sekarang adalah : %d rupiah\n", *uang_asal);
-
 }

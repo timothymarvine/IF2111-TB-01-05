@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "cart.h"
 
 void CartAdd(Map *c, int qty, ArrayDin list, Word newItem){
@@ -24,31 +23,80 @@ void CartRemove(Map *c, int qty, Word item){
     }
 }
 
-int main(void){
-    Map cart; CreateEmptyM(&cart);
-    int qty = 5;
-    ArrayDin barang = MakeArrayDin(); 
-    char kata[4] = "Ayam";
-    for(int i = 0; i < 4; i++){
-        barang.A[0].name[i] = kata[i];
+void CARTPAY(Map *cart, ArrayDin list){
+  if (cart->Count == 0) {
+      printf("Keranjang kamu kosong!\n");
+      return;
+  }
+  int userMoney = 100;
+  printf("Kamu akan membeli barang-barang berikut.\n");
+  printf("Kuantitas\tNama\t\tTotal\n");
+
+  int totalCost = 0;
+  for (int i = 0; i < cart->Count; i++) {
+    int j = 0;
+    while(!strCmpr(cart->Elements[i].Key, list.A[j].name)){
+      j++;
     }
-    barang.A[0].name[4] = '\0';
-    barang.Neff++;
+    int itemTotal = list.A[j].price * cart->Elements[i].Value;
+    totalCost += itemTotal;
+    printf("%d\t\t%s\t%d\n", cart->Elements[i].Value, cart->Elements[i].Key, itemTotal);
+  }
+  printf("Total biaya yang harus dikeluarkan adalah %d, apakah jadi dibeli? (Ya/Tidak)\n", totalCost);
+  STARTSENTENCE();
+  
+  Barang maxItem;
+  if (WordCompareString(currentWord, "Ya")){
+    if (userMoney >= totalCost) {
+      userMoney -= totalCost;
+      // Purchase purchase;
+      // for (int i = 0; maxItem.name[i] != '\0'; i++) {
+      //   purchase.itemName[i] = maxItem.name[i];
+      //   purchase.itemName[i + 1] = '\0';
+      // }
+      // purchase.quantity = 1;
+      // purchase.price = maxTotal;
 
-    printf("Barang ke keranjang: ");
-    STARTSENTENCE();
+      // if (!IsFullStack(*history)) {
+      //   Push(history, purchase);
+      // }
+      // else {
+      //   printf("Riwayat pembelian penuh. Tidak dapat menyimpan riwayat ini.\n");
+      // }
 
-    CartAdd(&cart, qty, barang, currentWord);
+      cart->Count = 0;
 
-    printf("Hapus barang: ");
-    STARTSENTENCE();
-
-    qty = -10;
-    CartRemove(&cart, qty, currentWord);
-
-    if(cart.Count == 0){
-        printf("Keranjang kosong!");
-    } else {
-        DisplayMap(cart);
+      printf("Selamat kamu telah membeli barang-barang tersebut!\n");
     }
+    else {
+      printf("Uang kamu hanya %d, tidak cukup untuk membeli keranjang!\n", userMoney);
+    }
+  }
+  else if (WordCompareString(currentWord, "Tidak")) {
+    return;
+  }
+  else {
+    return;
+  }
+}
+
+void CARTSHOW(Map cart, ArrayDin list){
+  if (cart.Count == 0) {
+      printf("Keranjang kamu kosong!\n");
+      return;
+  }
+  printf("Berikut adalah isi keranjangmu.\n");
+  printf("Kuantitas\tNama\t\tTotal\n");
+
+  int totalCost = 0;
+  for (int i = 0; i < cart.Count; i++) {
+    int j = 0;
+    while(!strCmpr(cart.Elements[i].Key, list.A[j].name)){
+      j++;
+    }
+    int itemTotal = list.A[j].price * cart.Elements[i].Value;
+    totalCost += itemTotal;
+    printf("%d\t\t%s\t%d\n", cart.Elements[i].Value, cart.Elements[i].Key, itemTotal);
+  }
+  printf("Total biaya yang harus dikeluarkan adalah %d.\n", totalCost);
 }

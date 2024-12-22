@@ -68,5 +68,4 @@ void tebakAngka(int *uang_asal){
     hadiah_sisa_uang = 500 - 50*(10-kesempatan);
     *uang_asal -= hadiah_sisa_uang;
     printf("Kesempatan Anda sudah habis. Angka yang benar adalah %d. Uang Anda tersisa %d\n", RNGnumber, *uang_asal);
-    
 }
